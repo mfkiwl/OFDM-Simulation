@@ -1,0 +1,21 @@
+function H_LMSE=LMSE_CE(Y,Xp,pilot_loc,Nfft,Nps,h,SNR)
+snr=10^(SNR*0.1);
+Np=Nfft/Nps;
+k=1:Np;
+H_tilde=Y(1:pilot_loc(k))./Xp(k);
+k=0:length(h)-1;
+hh=h*h';
+tmp=h.*conj(h).*k;
+r=sum(tmp)/hh;
+r2=tmp*k.'/hh;
+tau_rms=sqrt(r2-r^2);
+df=1/Nfft;
+j2pi_tau_df=j*2*pi*tau_rms*df;
+K1=repmat([0:Nfft-1].',1,Np);
+K2=repmat([0:Np-1],Nfft,1);
+rf = 1./(1+j2pi_tau_df*Nps*(K1-K2)); % Eq.(6.17a)
+K3 = repmat([0:Np-1].',1,Np); K4 = repmat([0:Np-1],Np,1);
+rf2 = 1./(1+j2pi_tau_df*Nps*(K3-K4)); % Eq.(6.17a)
+Rhp = rf;
+Rpp = rf2 + eye(length(H_tilde),length(H_tilde))/snr; % Eq.(6.14)
+H_LMSE = transpose(Rhp*inv(Rpp)*H_tilde.'); % MMSE estimate Eq.(6.15)
