@@ -27,6 +27,16 @@ As shown in Figure \ref{Cyclic-extension-tolerance} [8], a guard period, another
 
 \subsection{OFDM Parameters and Characteristics}
 
-The number of carriers in an OFDM system is not only limited by the
-available spectral bandwidth, but also by the IFFT size, which is determined by the complexity of the system [10]. The more complex (also more costly) the OFDM system is, the higher
-IFFT size it has; thus a higher number of carriers can be used, and higher data
+\subsubsection{Complexity}
+
+The number of carriers in an OFDM system is not only limited by the available spectral bandwidth, but also by the IFFT size, which is determined by the complexity of the system [10]. The more complex (also more costly) the OFDM system is, the higher IFFT size it has; thus a higher number of carriers can be used, and higher data transmission rate achieved. The choice of M-PSK modulation varies the data rate and Bit Error Rate (BER). The higher order of PSK leads to larger symbol size, thus less number of symbols needed to be transmitted, and higher data rate is achieved. But this results in a higher BER since the range of 0-360 degrees of phases will be divided into more sub-regions, and the smaller size of sub-regions is required, thereby received phases have higher chances to be decoded incorrectly. OFDM signals have high peak-to-average ratio, therefore it has a relatively high tolerance of peak power clipping due to transmission limitations.
+
+\subsubsection{Orthogonality}
+
+The key to OFDM is maintaining orthogonality of the carriers. If the integral of the product of two signals is zero over a time period, then these two signals are said to be orthogonal to each other. Two sinusoids with frequencies that are integer multiples of a common frequency can satisfy this criterion. Therefore, orthogonality is defined by :
+
+\begin{equation}\label{eq1}
+    \int_{0}^{T} cos(2 \pi n f_o t) cos(2 \pi m f_o t) \,dt = 0 (n \neq m) 
+\end{equation}
+
+where n and m are two unequal integers; $f_o$ is the fundamental frequency; T is the period over which the integration is taken. For OFDM, T is one symbol period and fo set to to 1 T for optimal effectiveness.
