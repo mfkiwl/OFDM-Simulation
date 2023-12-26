@@ -48,7 +48,14 @@ Int Gray-mapping, two adjacent constellation symbols differ only by one bit and 
 
 \subsection{OFDM Transmitter}
 
-As mention earlier, the input is a 3 channels, 256x256 bitmap image (Figure \ref{input})
+Now, that we have defined the necessary parameters for our OFDM example, let us consider the blocks in the OFDM system. As mention earlier, the input b is a 3 channels, 256x256 bitmap image (Figure \ref{input}). To fully transmitt this imgae, we need 256*256*3=196608 bits.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Block-diagram-2.png}
+    \caption{\bfseries\centering\fontsize{13pt}{0pt}\selectfont Block diagram of the OFDM system}
+    \label{Block diagram 2}    
+\end{figure}
 
 \begin{figure}[htbp]
     \centering
@@ -57,7 +64,43 @@ As mention earlier, the input is a 3 channels, 256x256 bitmap image (Figure \ref
     \label{input}
 \end{figure}
 
+These bits are now sent to a serial-to-parallel converter, which groups the bits for the OFDM frame into a groups of $\mu$ bits (i.e. one group for each subcarrier). The bits groups are then sent to the mapper. The mapper converts the groups into complex-valued constellation symbols according to the mapping\_table (Figure \ref{mapping}).
+
+The next step is the allocation of different subcarriers with data and pilots. For each subcarrier we have defined wether it carries data or a pilot by the arrays dataCarriers and pilotCarriers. Now, to create the overall OFDM data, we need to put the data and pilots into the OFDM carriers. Now, the OFDM carriers contained in OFDM\_data can be transformed to the time-domain by means of the IDFT operation.
+
+Subsequently, we add a cyclic prefix to the symbol. This operation concatenates a copy of the last CP samples of the OFDM time domain signal to the beginning. This way, a cyclic extension is achieved. The CP fulfills two tasks:
+\begin{enumerate}
+    \item It isolates different OFDM blocks from each other when the wireless channel contains multiple paths, i.e. is frequency-selective.
+    \item It turns the linear convolution with the channel into a circular one. Only with a circular convolution, we can use the single-tap equalization OFDM is so famous for.
+\end{enumerate}
+
+After this step :
+\begin{itemize}
+    \item Number of OFDM carriers in frequency domain: 128
+    \item Number of OFDM samples in time-domain before CP: 128
+    \item Number of OFDM samples in time domain with CP: 160
+\end{itemize}
+
+Now, the signal is sent to the antenna and sent over the air to the receiver. In between both antennas, there is the wireless channel. We model this channel as a static multipath channel with impulse response channelResponse. Hence, the signal at the receive antenna is the convolution of the transmit signal with the channel response. Additionally, we add some noise to the signal according to the given SNR value. Figure \ref{tx_rx} shows the TX and RX signal with SNR value = 20db.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../Source/results/tx_rx.png}
+    \caption{TX and RX signal with SNR value = 20db}
+    \label{tx_rx}
+\end{figure}
+
 \subsection{OFDM Receiver}
+
+Now, at the receiver the CP is removed from the signal and a window of $K$ samples is extracted from the received signal. Afterwards, the signal is transformed back to the frequency domain, in order to have the received value on each subcarrier available.
+
+The principle of channel estimation is as follows:
+
+The transmit signal contains pilot values at certain pilot carriers. These pilot values and their position in the frequency domain (i.e. the pilot carrier index) are known to the receiver. From the received information at the pilot subcarriers, the receiver can estimate the effect of the wireless channel onto this subcarrier (because it knows what was transmitted and what was received). Hence, the receiver gains information about the wireless channel at the pilot carriers. However, it wants to know what happened at the data carriers. To achieve this, it interpolates the channel values between the pilot carriers to get an estimate of the channel in the data carriers.
+
+Now that the channel is estimated at all carriers, we can use this information in the channel equalizer step. Here, for each subcarrier, the influence of the channel is removed such that we get the clear (only noisy) constellation symbols back. The next step is to extract the data carriers from the equalized symbol. Here, we throw away the pilot carriers, as they do not provide any information, but were used for the channel estimation process.
+
+
 
 \begin{figure}[htbp]
     \centering
