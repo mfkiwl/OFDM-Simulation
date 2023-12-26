@@ -39,12 +39,12 @@ Principles of operation for each block:
     \item LPF (Low Pass Filter): Low-pass filter that brings the signal back to baseband.
     \item D/A, A/D: Converts signals from digital to analog and analog to digital for long-distance transmission. The signal after D/A conversion is an analog baseband signal with a bandwidth depending on the sampling frequency in the D/A converter. At the receiver, an A/D converter is used to obtain digital signals for decoding.
     \item Pilot Extraction, Channel Estimation: Based on pilot signals, the receiver estimates the transmission channel using estimation algorithms.
-    \item 64-QAM Modulation/Demodulation: Maps binary sequences to complex signals characteristic of points in the QAM signal constellation. As illustrated in Figure \ref{Constellation}, each bit sequence corresponds to one point on the complex plane. Quadrature Amplitude Modulation (QAM) is a modulation technique that combines amplitude modulation and phase modulation. Compared to other modulation types, QAM signals can resist noise effectively because the receiver can differentiate based on both amplitude and phase. The symbol constellation of QAM signals has larger amplitude and phase differences than other modulation types with the same number of levels M, making it less susceptible to interference when symbols overlap.
+    \item 64-QAM Modulation/Demodulation: Maps binary sequences to complex signals characteristic of points in the QAM signal constellation. As illustrated in Figure \ref{mapping}, each bit sequence corresponds to one point on the complex plane. Quadrature Amplitude Modulation (QAM) is a modulation technique that combines amplitude modulation and phase modulation. Compared to other modulation types, QAM signals can resist noise effectively because the receiver can differentiate based on both amplitude and phase. The symbol constellation of QAM signals has larger amplitude and phase differences than other modulation types with the same number of levels M, making it less susceptible to interference when symbols overlap.
 \end{itemize}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\textwidth]{Figures/64-QAM-Constellation.png}
-    \caption{\bfseries\centering\fontsize{13pt}{0pt}\selectfont 64-QAM Constellation}
-    \label{Constellation}   
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=\textwidth]{Figures/64-QAM-Constellation.png}
+%     \caption{\bfseries\centering\fontsize{13pt}{0pt}\selectfont 64-QAM Constellation}
+%     \label{mapping}   
+% \end{figure}
