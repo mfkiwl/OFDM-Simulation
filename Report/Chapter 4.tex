@@ -50,7 +50,7 @@ Int Gray-mapping, two adjacent constellation symbols differ only by one bit and 
 
 As mention earlier, the input is a 3 channels, 256x256 bitmap image (Figure \ref{input})
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{../Source/results/input.png}
     \caption{Input image}
@@ -63,26 +63,33 @@ As mention earlier, the input is a 3 channels, 256x256 bitmap image (Figure \ref
     \centering
      \begin{subfigure}[t]{.49\linewidth}
         \includegraphics[width=\linewidth]{../Source/results/output_0db.png}
-        \caption{Pilot Carriers}
+        \caption{SNR = 0db}
         \label{0db}
     \end{subfigure}
     \hfil
     \begin{subfigure}[t]{0.49\linewidth}
         \includegraphics[width=\linewidth]{../Source/results/output_10db.png}
-        \caption{Data Carriers}
+        \caption{SNR = 10db}
         \label{10db}
     \end{subfigure}
     \hfil
     \begin{subfigure}[t]{0.49\linewidth}
         \includegraphics[width=\linewidth]{../Source/results/output_20db.png}
-        \caption{SNR = 20}
+        \caption{SNR = 20db}
         \label{20db}
     \end{subfigure}
     \hfil
     \begin{subfigure}[t]{0.49\linewidth}
         \includegraphics[width=\linewidth]{../Source/results/output_30db.png}
-        \caption{Data Carriers}
+        \caption{SNR = 30db}
         \label{30db}
     \end{subfigure}
     \caption{The received using 64 QAM module}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{../Source/results/ber.png}
+    \caption*{Plot of BER for SNRdb values from 0 to 50}
+    \label{ber}
 \end{figure}
