@@ -1,12 +1,9 @@
-\documentclass{standalone}
-\usepackage{tikz}
 \usetikzlibrary{positioning}
 \tikzset{block/.style={draw,thick,minimum width=1cm,minimum height=1cm,align=center}}
 \tikzset{node distance=0.5cm}
 \tikzset{double distance=1pt}
 \tikzset{>=latex}
 
-\begin{document}
 \begin{tikzpicture}
     \begin{scope}
         \draw [->] (-0.5,0) node [left] {$\vec{b}$}  -- (0,0) node (SP1) [right,block] {S/P}; 
@@ -56,5 +53,3 @@
         \draw [->,double] (C) |- (CP1);
     \end{scope}
 \end{tikzpicture}
-
-\end{document}
