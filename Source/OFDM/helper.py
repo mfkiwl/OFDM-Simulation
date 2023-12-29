@@ -1,3 +1,5 @@
+import numpy as np
+import requests
 def xor(a, b): 
    
     # initialize result 
