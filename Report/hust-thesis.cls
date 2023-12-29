@@ -1,5 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{hust-thesis}[This template is translated by Trang Nguyen Minh and Hanh Nguyen Hong, from BKIC 611 lab with love <3]
+% Original : https://www.overleaf.com/latex/templates/graduation-thesis-template-eng-ver/hbnynvndycyr
 \LoadClass{article}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T5]{fontenc} % Vietnamese
