@@ -2,5 +2,5 @@
 .vscode/
 Report/build/
 !Report/build/main.pdf
-
+__pycache__
 ~$*
