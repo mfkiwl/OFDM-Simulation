@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 import scipy
 import scipy.fftpack
 import math as math
+from .helper import PS_FIXED
 
-def group_bits(bitc):
+def group_bits(bitc, payloadBits_per_OFDM):
     bity = []
     x = 0
     for i in range((len(bitc)//payloadBits_per_OFDM)+1):
@@ -15,14 +16,14 @@ def group_bits(bitc):
     bity[-1] = pp
     return bity
 
-def SP(bits):
+def SP(bits, dataCarriers, mu):
     return bits.reshape((len(dataCarriers), mu))
 
 
-def Mapping(bits):
+def Mapping(bits, mapping_table):
     return np.array([mapping_table[tuple(b)] for b in bits])
 
-def OFDM_symbol(QAM_payload):
+def OFDM_symbol(QAM_payload, K, pilotCarriers, dataCarriers, pilotValue):
     symbol = np.zeros(K, dtype=complex) # the overall K subcarriers
     symbol[pilotCarriers] = pilotValue  # allocate the pilot subcarriers
     symbol[dataCarriers] = QAM_payload  # allocate the pilot subcarriers
@@ -31,12 +32,11 @@ def OFDM_symbol(QAM_payload):
 def IDFT(OFDM_data):
     return np.fft.ifft(OFDM_data)
 
-
-def addCP(OFDM_time):
+def addCP(OFDM_time, CP):
     cp = OFDM_time[-CP:]               # take the last CP samples ...
     return np.hstack([cp, OFDM_time])  # add them to the beginning
 
-def channel(signal):
+def channel(signal, channelResponse, SNRdb):
     convolved = np.convolve(signal,channelResponse)
     signal_power = np.mean(abs(convolved**2))
     sigma2 = signal_power * 10**(-SNRdb/10) # calculate noise power based on signal power and SNR
@@ -45,13 +45,13 @@ def channel(signal):
     noise = np.sqrt(sigma2/2) * (np.random.randn(*convolved.shape)+1j*np.random.randn(*convolved.shape))
     return convolved + noise
 
-def removeCP(signal):
+def removeCP(signal, CP, K):
     return signal[CP:(CP+K)]
 
 def DFT(OFDM_RX):
     return np.fft.fft(OFDM_RX)
 
-def channelEstimate(OFDM_demod):
+def channelEstimate(OFDM_demod, pilotCarriers, pilotValue, allCarriers, H_exact):
     pilots = OFDM_demod[pilotCarriers]  # extract the pilot values from the RX signal
     Hest_at_pilots = pilots / pilotValue # divide by the transmitted pilot values
 
@@ -72,10 +72,10 @@ def channelEstimate(OFDM_demod):
 def equalize(OFDM_demod, Hest):
     return OFDM_demod / Hest
 
-def get_payload(equalized):
+def get_payload(equalized, dataCarriers):
     return equalized[dataCarriers]
 
-def Demapping(QAM):
+def Demapping(QAM, demapping_table):
     # array of possible constellation points
     constellation = np.array([x for x in demapping_table.keys()])
 
@@ -95,7 +95,7 @@ def Demapping(QAM):
 def PS(bits):
     return bits.reshape((-1,))
 
-def channelEstimate_FIXED(OFDM_demod):
+def channelEstimate_FIXED(OFDM_demod, pilotCarriers, pilotValue, allCarriers):
     pilots = OFDM_demod[pilotCarriers]  # extract the pilot values from the RX signal
     Hest_at_pilots = pilots / pilotValue # divide by the transmitted pilot values
 
@@ -107,7 +107,7 @@ def channelEstimate_FIXED(OFDM_demod):
     Hest = Hest_abs * np.exp(1j*Hest_phase)
     return Hest
 
-def SNR_return(num_snr):
+def SNR_return(num_snr, channelResponse, bitx, PS_FIXED, CP, K):
     def channel_V(signal):
         convolved = np.convolve(signal,channelResponse)
         signal_power = np.mean(abs(convolved**2))
@@ -137,7 +137,7 @@ def SNR_return(num_snr):
         ber.append(np.sum(abs(bitsnr-bits_est))/len(bitsnr))
     return SNR_Array, ber
 
-def bit_plot(bit_x, a ,b):
+def bit_plot(bit_x,a , b, bitx):
     sin_time = []
     #import math as math
     # Number of sample points
@@ -204,7 +204,7 @@ def bit_plot(bit_x, a ,b):
     plt.xlabel("Frequency(Hz)")
     plt.show()
 
-def channel_X(signal):
+def channel_X(signal, channelResponse, SNRdb):
     convolved = np.convolve(signal,channelResponse)
     signal_power = np.mean(abs(convolved**2))
     sigma2 = signal_power * 10**(-SNRdb/10) # calculate noise power based on signal power and SNR
@@ -212,7 +212,7 @@ def channel_X(signal):
     noise = np.sqrt(sigma2/2) * (np.random.randn(*convolved.shape)+1j*np.random.randn(*convolved.shape))
     return convolved + noise
 
-def pro_bits(SNR_X, bit):
+def pro_bits(SNR_X, bit, CP, K, img_rft, payloadBits_per_OFDM):
     ber = 0
     bit_rx1 = []
     SNRdb = SNR_X
