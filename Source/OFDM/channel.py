@@ -16,9 +16,8 @@ def group_bits(bitc, payloadBits_per_OFDM):
     bity[-1] = pp
     return bity
 
-def SP(bits, dataCarriers, mu):
-    return bits.reshape((len(dataCarriers), mu))
-
+def SP(bits_serial, dataCarriers, mu):
+    return bits_serial.reshape((len(dataCarriers), mu))
 
 def Mapping(bits, mapping_table):
     return np.array([mapping_table[tuple(b)] for b in bits])
