@@ -24,7 +24,7 @@ def Mapping(bits):
 
 def OFDM_symbol(QAM_payload):
     symbol = np.zeros(K, dtype=complex) # the overall K subcarriers
-    symbol[pilotCarriers] = pilotValue  # allocate the pilot subcarriers 
+    symbol[pilotCarriers] = pilotValue  # allocate the pilot subcarriers
     symbol[dataCarriers] = QAM_payload  # allocate the pilot subcarriers
     return symbol
 
@@ -35,12 +35,12 @@ def IDFT(OFDM_data):
 def addCP(OFDM_time):
     cp = OFDM_time[-CP:]               # take the last CP samples ...
     return np.hstack([cp, OFDM_time])  # add them to the beginning
- 
+
 def channel(signal):
     convolved = np.convolve(signal,channelResponse)
     signal_power = np.mean(abs(convolved**2))
     sigma2 = signal_power * 10**(-SNRdb/10) # calculate noise power based on signal power and SNR
-    print ("RX Signal power: %.4f. Noise power: %.4f" % (signal_power, sigma2))     
+    print ("RX Signal power: %.4f. Noise power: %.4f" % (signal_power, sigma2))
     # Generate complex noise with given variance
     noise = np.sqrt(sigma2/2) * (np.random.randn(*convolved.shape)+1j*np.random.randn(*convolved.shape))
     return convolved + noise
@@ -54,20 +54,20 @@ def DFT(OFDM_RX):
 def channelEstimate(OFDM_demod):
     pilots = OFDM_demod[pilotCarriers]  # extract the pilot values from the RX signal
     Hest_at_pilots = pilots / pilotValue # divide by the transmitted pilot values
-    
+
     # Perform interpolation between the pilot carriers to get an estimate
-    # of the channel in the data carriers. Here, we interpolate absolute value and phase 
+    # of the channel in the data carriers. Here, we interpolate absolute value and phase
     # separately
     Hest_abs = scipy.interpolate.interp1d(pilotCarriers, abs(Hest_at_pilots), kind='linear')(allCarriers)
     Hest_phase = scipy.interpolate.interp1d(pilotCarriers, np.angle(Hest_at_pilots), kind='linear')(allCarriers)
     Hest = Hest_abs * np.exp(1j*Hest_phase)
-    
+
     plt.plot(allCarriers, abs(H_exact), label='Correct Channel')
     plt.stem(pilotCarriers, abs(Hest_at_pilots), label='Pilot estimates')
     plt.plot(allCarriers, abs(Hest), label='Estimated channel via interpolation')
     plt.grid(True); plt.xlabel('Carrier index'); plt.ylabel('$|H(f)|$'); plt.legend(fontsize=10)
     plt.ylim(0,2)
-    
+
     return Hest
 def equalize(OFDM_demod, Hest):
     return OFDM_demod / Hest
@@ -78,17 +78,17 @@ def get_payload(equalized):
 def Demapping(QAM):
     # array of possible constellation points
     constellation = np.array([x for x in demapping_table.keys()])
-    
+
     # calculate distance of each RX point to each possible point
     dists = abs(QAM.reshape((-1,1)) - constellation.reshape((1,-1)))
-    
-    # for each element in QAM, choose the index in constellation 
+
+    # for each element in QAM, choose the index in constellation
     # that belongs to the nearest constellation point
     const_index = dists.argmin(axis=1)
-    
+
     # get back the real constellation point
     hardDecision = constellation[const_index]
-    
+
     # transform the constellation point into the bit groups
     return np.vstack([demapping_table[C] for C in hardDecision]), hardDecision
 
@@ -98,13 +98,13 @@ def PS(bits):
 def channelEstimate_FIXED(OFDM_demod):
     pilots = OFDM_demod[pilotCarriers]  # extract the pilot values from the RX signal
     Hest_at_pilots = pilots / pilotValue # divide by the transmitted pilot values
-    
+
     # Perform interpolation between the pilot carriers to get an estimate
-    # of the channel in the data carriers. Here, we interpolate absolute value and phase 
+    # of the channel in the data carriers. Here, we interpolate absolute value and phase
     # separately
     Hest_abs = scipy.interpolate.interp1d(pilotCarriers, abs(Hest_at_pilots), kind='linear')(allCarriers)
     Hest_phase = scipy.interpolate.interp1d(pilotCarriers, np.angle(Hest_at_pilots), kind='linear')(allCarriers)
-    Hest = Hest_abs * np.exp(1j*Hest_phase)   
+    Hest = Hest_abs * np.exp(1j*Hest_phase)
     return Hest
 
 def SNR_return(num_snr):
