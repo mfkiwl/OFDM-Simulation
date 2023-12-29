@@ -12,7 +12,7 @@ def group_bits(bitc, payloadBits_per_OFDM):
         bity.append(bitc[x:x+payloadBits_per_OFDM])
         x = x+payloadBits_per_OFDM
     k = i-1
-    pp = np.zeros(714, dtype = int)
+    pp = np.zeros(payloadBits_per_OFDM, dtype = int)
     bity[-1] = pp
     return bity
 
