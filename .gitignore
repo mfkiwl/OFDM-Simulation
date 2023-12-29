@@ -1,4 +1,6 @@
 .auxiliary/
 .vscode/
 Report/build/
+!Report/build/main.pdf
+
 ~$*
