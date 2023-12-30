@@ -19,6 +19,9 @@ def group_bits(bitc, payloadBits_per_OFDM):
 def SP(bits_serial, dataCarriers, mu):
     return bits_serial.reshape((len(dataCarriers), mu))
 
+def PS(bits):
+    return bits.reshape((-1,))
+
 def Mapping(bits, mapping_table):
     return np.array([mapping_table[tuple(b)] for b in bits])
 
@@ -91,9 +94,6 @@ def Demapping(QAM, demapping_table):
     # transform the constellation point into the bit groups
     return np.vstack([demapping_table[C] for C in hardDecision]), hardDecision
 
-def PS(bits):
-    return bits.reshape((-1,))
-
 def channelEstimate_FIXED(OFDM_demod, pilotCarriers, pilotValue, allCarriers):
     pilots = OFDM_demod[pilotCarriers]  # extract the pilot values from the RX signal
     Hest_at_pilots = pilots / pilotValue # divide by the transmitted pilot values
@@ -106,7 +106,7 @@ def channelEstimate_FIXED(OFDM_demod, pilotCarriers, pilotValue, allCarriers):
     Hest = Hest_abs * np.exp(1j*Hest_phase)
     return Hest
 
-def SNR_return(num_snr, channelResponse, bitx, PS_FIXED, CP, K):
+def SNR_return(num_snr, channelResponse, mapping_table, demapping_table, allCarriers, pilotCarriers, dataCarriers, pilotValue, bitx, CP, K, mu):
     def channel_V(signal):
         convolved = np.convolve(signal,channelResponse)
         signal_power = np.mean(abs(convolved**2))
@@ -119,19 +119,19 @@ def SNR_return(num_snr, channelResponse, bitx, PS_FIXED, CP, K):
     ber = []
     for i in SNR_Array:
         SNRdb = i
-        bits_SP = SP(bitsnr)
-        QAM = Mapping(bits_SP)
-        OFDM_data = OFDM_symbol(QAM)
+        bits_SP = SP(bitsnr, dataCarriers, mu)
+        QAM = Mapping(bits_SP, mapping_table)
+        OFDM_data = OFDM_symbol(QAM, K, pilotCarriers, dataCarriers, pilotValue)
         OFDM_time = IDFT(OFDM_data)
-        OFDM_withCP = addCP(OFDM_time)
+        OFDM_withCP = addCP(OFDM_time, CP)
         OFDM_Tx = OFDM_withCP
         OFDM_Rx = channel_V(OFDM_withCP)
         OFDM_RX_noCP = OFDM_Rx[(CP):(CP+K)]
         OFDM_demod = DFT(OFDM_RX_noCP)
-        Hest = channelEstimate_FIXED(OFDM_demod)
+        Hest = channelEstimate_FIXED(OFDM_demod, pilotCarriers, pilotValue, allCarriers)
         equalized_Hest = equalize(OFDM_demod, Hest)
-        QAM_est = get_payload(equalized_Hest)
-        PS_est, hardDecision = Demapping(QAM_est)
+        QAM_est = get_payload(equalized_Hest, dataCarriers)
+        PS_est, hardDecision = Demapping(QAM_est, demapping_table)
         bits_est = PS_FIXED(PS_est)
         ber.append(np.sum(abs(bitsnr-bits_est))/len(bitsnr))
     return SNR_Array, ber
@@ -211,24 +211,24 @@ def channel_X(signal, channelResponse, SNRdb):
     noise = np.sqrt(sigma2/2) * (np.random.randn(*convolved.shape)+1j*np.random.randn(*convolved.shape))
     return convolved + noise
 
-def pro_bits(SNR_X, bit, CP, K, img_rft, payloadBits_per_OFDM):
+def pro_bits(SNR_X, bit, CP, K, img_rft, payloadBits_per_OFDM, allCarriers, pilotCarriers, dataCarriers, pilotValue, mu, mapping_table, demapping_table, channelResponse):
     ber = 0
     bit_rx1 = []
     SNRdb = SNR_X
     for i in bit:
-        bits_SP = SP(i)
-        QAM = Mapping(bits_SP)
-        OFDM_data = OFDM_symbol(QAM)
+        bits_SP = SP(i, dataCarriers, mu)
+        QAM = Mapping(bits_SP, mapping_table)
+        OFDM_data = OFDM_symbol(QAM, K, pilotCarriers, dataCarriers, pilotValue)
         OFDM_time = IDFT(OFDM_data)
-        OFDM_withCP = addCP(OFDM_time)
+        OFDM_withCP = addCP(OFDM_time, CP)
         OFDM_Tx = OFDM_withCP
-        OFDM_Rx = channel_X(OFDM_withCP)
+        OFDM_Rx = channel_X(OFDM_withCP, channelResponse, SNRdb)
         OFDM_RX_noCP = OFDM_Rx[(CP):(CP+K)]
         OFDM_demod = DFT(OFDM_RX_noCP)
-        Hest = channelEstimate_FIXED(OFDM_demod)
+        Hest = channelEstimate_FIXED(OFDM_demod, pilotCarriers, pilotValue, allCarriers)
         equalized_Hest = equalize(OFDM_demod, Hest)
-        QAM_est = get_payload(equalized_Hest)
-        PS_est, hardDecision = Demapping(QAM_est)
+        QAM_est = get_payload(equalized_Hest, dataCarriers)
+        PS_est, hardDecision = Demapping(QAM_est, demapping_table)
         bits_est = PS_FIXED(PS_est)
         ber += np.sum(abs(i-bits_est))/len(i)
         bit_rx1.append(bits_est)
