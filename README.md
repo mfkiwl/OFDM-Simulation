@@ -19,3 +19,8 @@ jupyter nbconvert --to markdown 64_QAM_OFDM.ipynb
 pandoc --listings -f markdown -t latex 64_QAM_OFDM.md -o 64_QAM_OFDM.tex
 pdflatex 64_QAM_OFDM.tex
 ```
+
+# Clear output before commit
+```
+jupyter nbconvert --clear-output --inplace
+```
