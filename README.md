@@ -19,6 +19,10 @@ jupyter nbconvert --to markdown 64_QAM_OFDM.ipynb
 pandoc --listings -f markdown -t latex 64_QAM_OFDM.md -o 64_QAM_OFDM.tex
 pdflatex 64_QAM_OFDM.tex
 ```
+# To convert notebook to latex
+```
+jupyter nbconvert --to latex Source\64_QAM_OFDM.ipynb
+```
 
 # Clear output before commit
 ```
