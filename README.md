@@ -26,5 +26,5 @@ jupyter nbconvert --to latex Source\64_QAM_OFDM.ipynb
 
 # Clear output before commit
 ```
-jupyter nbconvert --clear-output --inplace
+jupyter nbconvert --clear-output --inplace Source\64_QAM_OFDM.ipynb
 ```
