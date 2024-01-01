@@ -4,5 +4,6 @@ build/
 *.png
 *.pdf
 *.eps
+*.fig
 __pycache__
 ~$*
