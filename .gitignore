@@ -1,5 +1,8 @@
 .auxiliary/
 .vscode/
 build/
+*.png
+*.pdf
+*.eps
 __pycache__
 ~$*
