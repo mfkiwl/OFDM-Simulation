@@ -8,17 +8,17 @@
 %\RequirePackage[paperheight=29.7cm,paperwidth=21cm,right=2cm,left=3cm,top=2cm,bottom=2.5cm]{geometry}
 \RequirePackage[paperheight=29.7cm,paperwidth=21cm,right=2cm,left=3cm,top=2cm,bottom=2.5cm,twoside]{geometry}
 \RequirePackage{mathptmx} % Time New Roman
-\RequirePackage{graphicx} 
-\RequirePackage{float} 
+\RequirePackage{graphicx}
+\RequirePackage{float}
 \RequirePackage{tikz}
 \RequirePackage{subcaption}
 
-\usetikzlibrary{calc} 
-\RequirePackage{indentfirst} 
+\usetikzlibrary{calc}
+\RequirePackage{indentfirst}
 \renewcommand{\baselinestretch}{1.2} % Line space 1.2
 \setlength{\parskip}{6pt} % Spacing after
 \setlength{\parindent}{1cm} % Set indent for each paragraph
-\RequirePackage{titlesec} 
+\RequirePackage{titlesec}
 \setcounter{secnumdepth}{4} % 4 Heading
 \titlespacing*{\section}{0pt}{0pt}{30pt} % Heading 1
 \titleformat*{\section}{\fontsize{16pt}{19.2pt}\selectfont \bfseries \centering}
