@@ -7,7 +7,7 @@ clc
 M = 64;
 BER= []
 QAM = log2(M);
-%SNR_dB = 40; % SNR PER BIT (dB)
+%SNR_dB = 20; % SNR PER BIT (dB)
 NUM_FRAMES = 1*(10^2); % SIMULATION RUNS
 FFT_LEN = 1024; % LENGTH OF THE FFT/IFFT
 CHAN_LEN = 10; % NUMBER OF CHANNEL TAPS
@@ -22,9 +22,8 @@ step = 1;
 for snr = snr_min:step:snr_max
 SNR = 10^(0.1*snr); % LINEAR SCALE
 NOISE_VAR_1D = 0.5*2*2*FADE_VAR_1D*CHAN_LEN/(2*FFT_LEN*SNR); % 1D VARIANCE OF AWGN
-%--------------------------------------------------------------------------
-%                        PREAMBLE GENERATION
-    PREAMBLE_A = randi([0 1], QAM * PREAMBLE_LEN, 1);
+%---------------- PREAMBLE GENERATION ------------------------------------
+PREAMBLE_A = randi([0 1], QAM * PREAMBLE_LEN, 1);
 PREAMBLE_QAM = [];
 for i = 1:QAM:length(PREAMBLE_A)
     % Chia chuỗi dữ liệu thành các phần có độ dài QAM
@@ -50,9 +49,8 @@ Rvv0 = PREAMBLE_QAM_IFFT*PREAMBLE_QAM_IFFT'/(PREAMBLE_LEN);
 MAX_STEP_SIZE = 2/(CHAN_LEN*Rvv0); % MAXIMUM STEP SIZE
 STEP_SIZE = 0.125*MAX_STEP_SIZE;
 
-%--------------------------------------------------------------
+%---------------- TRANSMITTER ------------------------------------
 % for FRAME_CNT = 1:NUM_FRAMES
-%                           TRANSMITTER
 % SOURCE
 A = randi([0 1],NUM_BIT,1); 
 
@@ -68,8 +66,7 @@ T_QAM_SIG = ifft(MOD_SIG);
 
 % INSERTING CYCLIC PREFIX AND PREAMBLE
 T_TRANS_SIG = [PREAMBLE_QAM_IFFT T_QAM_SIG(end-CP_LEN+1:end) T_QAM_SIG]; 
-%--------------------------------------------------------------------------
-%                            CHANNEL   
+%---------------- CHANNEL ------------------------------------
 % RAYLEIGH FADING CHANNEL
 FADE_CHAN = sqrt(FADE_VAR_1D)*randn(1,CHAN_LEN) + 1i*sqrt(FADE_VAR_1D)*randn(1,CHAN_LEN);     
 
@@ -79,9 +76,7 @@ AWGN = sqrt(NOISE_VAR_1D)*randn(1,FFT_LEN + CP_LEN + PREAMBLE_LEN + CHAN_LEN - 1
 
 % CHANNEL OUTPUT
 CHAN_OP = conv(T_TRANS_SIG,FADE_CHAN) + AWGN; % Chan_Op stands for channel output
-%--------------------------------------------------------------------------
-%                          RECEIVER 
-
+%---------------- RECEIVER ------------------------------------
 % CHANNEL ESTIMATION USING LMS
 EST_FADE_CHAN = zeros(1,CHAN_LEN); % INITIALIZATION
 
