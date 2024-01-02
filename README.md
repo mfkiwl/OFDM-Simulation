@@ -28,3 +28,8 @@ jupyter nbconvert --to latex Source\64_QAM_OFDM.ipynb
 ```
 jupyter nbconvert --clear-output --inplace Source\64_QAM_OFDM.ipynb
 ```
+
+# Slide shows
+```
+jupyter nbconvert --to slides --post serve Source\64_QAM_OFDM.ipynb
+```
