@@ -12,6 +12,7 @@
 \RequirePackage{float}
 \RequirePackage{tikz}
 \RequirePackage{subcaption}
+\RequirePackage{pdfpages}
 
 \usetikzlibrary{calc}
 \RequirePackage{indentfirst}
