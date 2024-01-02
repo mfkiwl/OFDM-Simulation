@@ -1,2 +1,2 @@
 @echo off
-for %%f in (Source\results\*.eps) do epstopdf %%f
+for %%f in (results\*.eps) do epstopdf %%f
