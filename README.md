@@ -15,6 +15,11 @@ jupyter nbconvert --to markdown 64_QAM_OFDM.ipynb
 ```
 
 # To convert markdown to latex and then into pdf
+Install pandoc with winget,
+```
+winget install --source winget --exact --id JohnMacFarlane.Pandoc
+pandoc --version
+```
 ```
 pandoc --listings -f markdown -t latex 64_QAM_OFDM.md -o 64_QAM_OFDM.tex
 pdflatex 64_QAM_OFDM.tex
