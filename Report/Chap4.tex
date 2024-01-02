@@ -25,11 +25,12 @@ After that, we need to define some index sets that describe which carriers trans
     \centering
     \includegraphics[width=\linewidth]{../Source/results/carrier_index}
     \caption{The Carriers transmit pilots and which carriers contain payload}
+    \label{carrier_index}
 \end{figure}
 
 Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol shall be defined in mapping table.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{../Source/results/mapping}
     \caption{64-QAM Constellation with gray-mapping}
@@ -37,6 +38,15 @@ Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol s
 \end{figure}
 
 In Figure \ref{mapping}, we have plotted the 64-QAM constellation, along with the bit-labels. In Gray-mapping, two adjacent constellation symbols differ only by one bit and the other 5 bits remain the same. This technique helps to minimize bit-errors, in case a wrong constellation symbol is detected: Most probably, symbol errors are "off-by-one" errors, i.e. a symbol next to the correct symbol is detected. Then, only a single bit-error occurs.
+
+Let us now define the wireless channel between transmitter and receiver. Here, we use a simple two-tap multipath channel with given impulse response channelResponse. Also, we plot the corresponding frequency response. As seen in Figure \ref{channel}, the channel is frequency-selective.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../Source/results/channel}
+    \caption{64-QAM Constellation with gray-mapping}
+    \label{channel}
+\end{figure}
 
 \subsection{OFDM Transmitter}
 
