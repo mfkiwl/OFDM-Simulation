@@ -6,10 +6,10 @@
 
 \begin{tikzpicture}
     \begin{scope}
-        \draw [->] (-0.5,0) node [left] {$\vec{b}$}  -- (0,0) node (SP1) [right,block] {S/P}; 
+        \draw [->] (-0.5,0) node [left] {$\vec{b}$}  -- (0,0) node (SP1) [right,block] {S2P}; 
         \node (M) [block,right=of SP1] {Mapping};
         \node (IFFT) [block,right=of M] {IFFT};
-        \node (PS1) [block,right=of IFFT] {P/S};
+        \node (PS1) [block,right=of IFFT] {P2S};
         \node (CP) [block,right=of PS1] {Add CP};
 
         \draw [double,->] (PS1) -- (CP);
@@ -30,12 +30,12 @@
         \node (C) [block,below right=of CP] {Channel}; 
 
         \node (CP1) [block,below left=of C] {Remove CP};
-        \node (SP2) [block,left=of CP1] {S/P};
+        \node (SP2) [block,left=of CP1] {S2P};
         \node (FFT) [block,left=of SP2] {FFT};
         \node (EQ) [block,left=of FFT] {Equalize};
         \node (CE) [block,below=of EQ] {Channel\\Estimate};
         \node (Dem) [block,left=of EQ] {Demapping};
-        \node (PS2) [block,left=of Dem] {P/S};
+        \node (PS2) [block,left=of Dem] {P2S};
         \draw [->] (PS2.west) -- +(-0.5,0) node [left] {$\hat{b}$};
 
         \def\ls{[<-,double]}
