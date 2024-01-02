@@ -5,16 +5,18 @@
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
-In this project, we're utilized the power of Python and the convenient jupyter notebook to simulate the 64 QAM OFDM system. Full notebook can be seen at the Appendix A.
+In this project, we're utilized the power of Python and the convenient jupyter notebook to simulate the 64 QAM OFDM system. Full notebook can be seen at the Appendix.
 % A 3 channels bitmap image is used as source input. Another bitmap iamge file will be generated at the end of the simulation as the output.
 
 \subsection{Configurations and Parameters set up}
 
 \begin{enumerate}
     \item $K = 64$ : The number of subcarriers, describes how many subcarriers are available in the OFDM system.
-    \item $CP = K//$4 : The length of the cyclic prefix (CP) denotes the number of samples that are copied from the end of the modulated block to the beginning, to yield a cyclic extension of the block.
+    \item $CP = K//$4 : The length of the cyclic prefix, denotes the number of samples that are copied from the end of the modulated block to the beginning, to yield a cyclic extension of the block.
     \item $P = 8$ : The number of pilots in the OFDM symbol, describes how many carriers are used to transmit known information (i.e. pilots). Pilots will be used at the receiver to estimate the wireless channel between transmitter and receiver.
-    \item $pilotValue = 3+3j$ : The known value each pilot transmits
+    \item $pilotValue = 3+3j$ : The known value each pilot transmits.
+    % \item $\mu = 6$ :Since we simulating 64QAM transmission, we need to define $\mu = \log_{2} 64$ bits per symbol
+    % \item $SNRDB = 20$ : Signal-to-Noise Ratio in dB, that should occur at the receiver.
 \end{enumerate}
 
 After that, we need to define some index sets that describe which carriers transmit pilots and which carriers contain payload.
@@ -25,7 +27,7 @@ After that, we need to define some index sets that describe which carriers trans
     \caption{The Carriers transmit pilots and which carriers contain payload}
 \end{figure}
 
-Let's define the modulation index $\mu$ and the corresponding mapping table. We consider 64QAM transmission, i.e. we have $\mu=6$ bits per symbol. Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol shall be defined in mapping table.
+Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol shall be defined in mapping table.
 
 \begin{figure}[ht]
     \centering
@@ -34,8 +36,7 @@ Let's define the modulation index $\mu$ and the corresponding mapping table. We 
     \label{mapping}
 \end{figure}
 
-In Figure \ref{mapping}, we have plotted the 64-QAM constellation, along with the bit-labels.
-Int Gray-mapping, two adjacent constellation symbols differ only by one bit and the other 5 bits remain the same. This technique helps to minimize bit-errors, in case a wrong constellation symbol is detected: Most probably, symbol errors are "off-by-one" errors, i.e. a symbol next to the correct symbol is detected. Then, only a single bit-error occurs.
+In Figure \ref{mapping}, we have plotted the 64-QAM constellation, along with the bit-labels. In Gray-mapping, two adjacent constellation symbols differ only by one bit and the other 5 bits remain the same. This technique helps to minimize bit-errors, in case a wrong constellation symbol is detected: Most probably, symbol errors are "off-by-one" errors, i.e. a symbol next to the correct symbol is detected. Then, only a single bit-error occurs.
 
 \subsection{OFDM Transmitter}
 
