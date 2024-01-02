@@ -49,7 +49,7 @@ Let us now define the wireless channel between transmitter and receiver. Here, w
 
 \subsection{OFDM Transmitter}
 
-Now, that we have defined the necessary parameters for our OFDM example, we need some data for testing. Here we using a 3 channel 256x256 bitmap image (Figure \ref{input}). To fully transmitt this image, we need 256*256*3=196608 bits.
+Now, that we have defined the necessary parameters for our OFDM example, we need some data for testing. Here we using a 3 channel 256x256 bitmap image (Figure \ref{input}).
 
 \begin{figure}[htbp]
     \centering
@@ -57,6 +57,19 @@ Now, that we have defined the necessary parameters for our OFDM example, we need
     \caption{The input source of the OFDM Transmitter}
     \label{input}
 \end{figure}
+
+We first need to get all the pixels value (from all 3 channels) and lay them in a 1D array. this array is gonna have a size of $width*height*channel = 256*256*3 = 196608$ (bytes). The pixels value is in decimal, we need to convert it into binary.
+
+Subsequently, we add the CRC (Cyclic redundancy check) \cite{crc} to the end of each byte. The CRC is serve as a way to check for errors. Basically, the  generator at the transmitter consists of 4 steps:
+
+\begin{enumerate}
+    \item Find the length of the devisor (key) $L$
+    \item Append $L-1$ bits to the original byte
+    \item Perform binary division operation to get $quotient$ and $remainder$
+    \item Remainder of the division = $CRC$
+\end{enumerate}
+
+Since we choose the key value of 1101. We add 3 bits to each bytes. Next we group the bits into groups of size $\mu * data\_carriers$, which in this case, equals 714.
 
 These bits are now sent to a serial-to-parallel converter, which groups the bits for the OFDM frame into a groups of $\mu$ bits (i.e. one group for each subcarrier). The bits groups are then sent to the mapper. The mapper converts the groups into complex-valued constellation symbols according to the mapping\_table (Figure \ref{mapping}).
 
