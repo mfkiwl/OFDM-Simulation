@@ -1,6 +1,7 @@
 .auxiliary/
 .vscode/
 build/
+media/
 *.png
 *.pdf
 *.eps
