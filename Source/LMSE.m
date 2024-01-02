@@ -122,11 +122,9 @@ DEC_QAM_MAP_SYM = QAM_SYM(INDICES);
 % DEMAPPING QAM SYMBOLS TO BITS
 DEC_A = [];
 for i=1:length(DEC_QAM_MAP_SYM)
-              
-                dataR = qamdemod(DEC_QAM_MAP_SYM(i), M, 'OutputType', 'bit');
- 
-               DEC_A=[DEC_A dataR];
-           end
+    dataR = qamdemod(DEC_QAM_MAP_SYM(i), M, 'OutputType', 'bit');
+    DEC_A=[DEC_A dataR];
+end
 DEC_A = reshape(DEC_A,[],1);
 % CALCULATING BIT ERRORS IN EACH FRAME
 C_BER = C_BER + nnz(A-DEC_A);
