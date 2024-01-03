@@ -6,7 +6,7 @@
 
 \begin{tikzpicture}
     \begin{scope}
-        \draw [->] (-0.5,0) node [left] {$\vec{b}$}  -- (0,0) node (SP1) [right,block] {S2P}; 
+        \draw [->] (-0.5,0) node [left] {$\vec{b}$}  -- (0,0) node (SP1) [right,block] {S2P};
         \node (M) [block,right=of SP1] {Mapping};
         \node (IFFT) [block,right=of M] {IFFT};
         \node (PS1) [block,right=of IFFT] {P2S};
@@ -15,19 +15,19 @@
         \draw [double,->] (PS1) -- (CP);
 
         \def\lines{
-        \draw \ls ([yshift=3.mm]\from.east) -- ([yshift=3.mm]\to.west); 
-        \draw \ls ([yshift=1.mm]\from.east) -- ([yshift=1.mm]\to.west); 
-        \draw \ls ([yshift=-1.mm]\from.east) -- ([yshift=-1.mm]\to.west); 
-        \draw \ls ([yshift=-3.mm]\from.east) -- ([yshift=-3.mm]\to.west);   
+        \draw \ls ([yshift=3.mm]\from.east) -- ([yshift=3.mm]\to.west);
+        \draw \ls ([yshift=1.mm]\from.east) -- ([yshift=1.mm]\to.west);
+        \draw \ls ([yshift=-1.mm]\from.east) -- ([yshift=-1.mm]\to.west);
+        \draw \ls ([yshift=-3.mm]\from.east) -- ([yshift=-3.mm]\to.west);
         }
 
         \def\ls{[->]}
-        \def\from{SP1} \def\to{M} \lines;
+        \def\from{SP1} \def\to{M} \lines
         \def\ls{[->,double]}
-        \def\from{M} \def\to{IFFT} \lines;
-        \def\from{IFFT} \def\to{PS1} \lines;
+        \def\from{M} \def\to{IFFT} \lines
+        \def\from{IFFT} \def\to{PS1} \lines
 
-        \node (C) [block,below right=of CP] {Channel}; 
+        \node (C) [block,below right=of CP] {Channel};
 
         \node (CP1) [block,below left=of C] {Remove CP};
         \node (SP2) [block,left=of CP1] {S2P};
@@ -39,12 +39,12 @@
         \draw [->] (PS2.west) -- +(-0.5,0) node [left] {$\hat{b}$};
 
         \def\ls{[<-,double]}
-        \def\from{SP2} \def\to{CP1} \lines;
-        \def\from{FFT} \def\to{SP2} \lines;
-        \def\from{EQ} \def\to{FFT} \lines;
-        \def\from{Dem} \def\to{EQ} \lines;
+        \def\from{SP2} \def\to{CP1} \lines
+        \def\from{FFT} \def\to{SP2} \lines
+        \def\from{EQ} \def\to{FFT} \lines
+        \def\from{Dem} \def\to{EQ} \lines
         \def\ls{[<-]}
-        \def\from{PS2} \def\to{Dem} \lines;
+        \def\from{PS2} \def\to{Dem} \lines
 
         \draw [->,double,thick] (FFT.south) |- (CE.east);
         \draw [->,double,thick] (CE.north) -- (EQ.south);
