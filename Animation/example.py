@@ -1,4 +1,7 @@
 from manim import *
+
+config.background_color = WHITE
+
 class Example(Scene):
     def construct(self):
         orange_square = Square(color=ORANGE, fill_opacity=0.5)
