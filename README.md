@@ -22,7 +22,11 @@ pandoc --version
 ```
 ```
 pandoc --listings -f markdown -t latex 64_QAM_OFDM.md -o 64_QAM_OFDM.tex
-pdflatex 64_QAM_OFDM.tex
+pandoc --listings -f markdown --template eisvogel Source\64_QAM_OFDM.md -o Source\64_QAM_OFDM.tex
+pandoc --listings -f markdown --template eisvogel Source\64_QAM_OFDM.md -o Source\64_QAM_OFDM.pdf
+```
+```
+pdflatex Source\64_QAM_OFDM.tex
 ```
 # To convert notebook to latex
 ```
