@@ -8,3 +8,4 @@ media/
 *.fig
 __pycache__
 ~$*
+manim
