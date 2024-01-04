@@ -2,43 +2,45 @@
 1. https://github.com/kornthum/OFDM_64QAM_Python
 2. https://dspillustrations.com/pages/posts/misc/python-ofdm-example.html
 
-# To Convert notebook to pdf
+# Converting
+## Convert notebook to pdf
 ```
 cd Source
 jupyter nbconvert --to pdf 64_QAM_OFDM.ipynb
 ```
 
-# To Convert notebook to markdown
+## Convert notebook to markdown
 ```
 cd Source
 jupyter nbconvert --to markdown 64_QAM_OFDM.ipynb
 ```
-
-# To convert markdown to latex and then into pdf
-Install pandoc with winget,
+## Convert using pandoc
+Install pandoc with winget
 ```
 winget install --source winget --exact --id JohnMacFarlane.Pandoc
 pandoc --version
 ```
+Convert to latex
 ```
 pandoc --listings -f markdown -t latex 64_QAM_OFDM.md -o 64_QAM_OFDM.tex
+pdflatex Source\64_QAM_OFDM.tex
+```
+Using [eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template) template
+```
 pandoc --listings -f markdown --template eisvogel Source\64_QAM_OFDM.md -o Source\64_QAM_OFDM.tex
 pandoc --listings -f markdown --template eisvogel Source\64_QAM_OFDM.md -o Source\64_QAM_OFDM.pdf
 ```
-```
-pdflatex Source\64_QAM_OFDM.tex
-```
-# To convert notebook to latex
+## To convert notebook to latex
 ```
 jupyter nbconvert --to latex Source\64_QAM_OFDM.ipynb
 ```
-
-# Clear output before commit
+# Helpful command
+## Clear output before commit
 ```
 jupyter nbconvert --clear-output --inplace Source\64_QAM_OFDM.ipynb
 ```
 
-# Slide shows
+## Slide shows
 ```
 jupyter nbconvert --to slides --post serve Source\64_QAM_OFDM.ipynb
 ```
