@@ -1,8 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import scipy
 import scipy.fftpack
-import math as math
 # from .helper import PS_FIXED
 
 
@@ -60,8 +58,8 @@ def OFDM_symbol(QAM_payload, K, dataCarriers, pilotCarriers, pilotValue):
     return symbol
 
 
-def FFT(OFDM_RX):
-    return np.fft.fft(OFDM_RX)
+def FFT(OFDM_RX, n=None):
+    return np.fft.fft(OFDM_RX, n)
 
 
 def IFFT(OFDM_data):
