@@ -1,5 +1,5 @@
-.auxiliary/
-.vscode/
+.*
+!.gitignore
 build/
 media/
 *.png
