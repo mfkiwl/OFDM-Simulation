@@ -1,6 +1,7 @@
 import numpy as np
-import scipy
-import scipy.fftpack
+from scipy.signal import fftconvolve
+from scipy.interpolate import interp1d
+from scipy.fftpack import fft
 # from .helper import PS_FIXED
 
 
@@ -85,6 +86,7 @@ def get_payload(equalized, dataCarriers):
 
 def channel(signal, channelResponse, snrdb):
     convolved = np.convolve(signal, channelResponse)
+    # convolved = fftconvolve(signal, channelResponse)
     signal_power = np.mean(abs(convolved**2))
     sigma2 = signal_power * 10**(-snrdb/10) # calculate noise power based on signal power and SNR
     # print ("RX Signal power: %.4f. Noise power: %.4f" % (signal_power, sigma2))
@@ -101,7 +103,7 @@ def channelEstimate(OFDM_demod, allCarriers, pilotCarriers, pilotValue):
     '''
     pilots = OFDM_demod[pilotCarriers]      # extract the pilot values from the RX signal
     Hest_at_pilots = pilots / pilotValue    # divide by the transmitted pilot values
-    Hest_abs = scipy.interpolate.interp1d(pilotCarriers, abs(Hest_at_pilots), kind='linear')(allCarriers)
-    Hest_phase = scipy.interpolate.interp1d(pilotCarriers, np.angle(Hest_at_pilots), kind='linear')(allCarriers)
+    Hest_abs = interp1d(pilotCarriers, abs(Hest_at_pilots), kind='linear')(allCarriers)
+    Hest_phase = interp1d(pilotCarriers, np.angle(Hest_at_pilots), kind='linear')(allCarriers)
     Hest = Hest_abs * np.exp(1j*Hest_phase)
     return Hest, Hest_at_pilots
