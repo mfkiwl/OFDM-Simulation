@@ -43,7 +43,7 @@ def mod2div(divident, divisor):
     return checkword
 
 
-def encodeData(data, key):
+def encode(data, key):
     l_key = len(key)
     # Appends n-1 zeroes at end of data
     appended_data = data + '0'*(l_key-1)
@@ -53,7 +53,7 @@ def encodeData(data, key):
     return codeword
 
 
-def decodeData(data, key):
+def decode(data, key):
     l_key = len(key)
     # Appends n-1 zeroes at end of data
     appended_data = data + '0'*(l_key-1)
@@ -73,7 +73,7 @@ def count_error(data):
 if(__name__ == "__main__"):
     data = "10010001"
     key = "1101"
-    encoded = encodeData(data, key)
-    decoded = decodeData(encoded, key)
+    encoded = encode(data, key)
+    decoded = decode(encoded, key)
     print(encoded)
     print(decoded)
