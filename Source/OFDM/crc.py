@@ -68,3 +68,12 @@ def count_error(data):
             if i!= '00':
                 count += 1
     return count # number error bits
+
+
+if(__name__ == "__main__"):
+    data = "10010001"
+    key = "1101"
+    encoded = encodeData(data, key)
+    decoded = decodeData(encoded, key)
+    print(encoded)
+    print(decoded)
