@@ -7,7 +7,7 @@
 \addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents 
 \thispagestyle{empty}
-\cleardoublepage
+\newpage
 
 \input{Abbreviations}
 
@@ -28,7 +28,10 @@
 
 \input{Contribution}
 
-\pagenumbering{arabic} % Đánh số thứ tự 1,2,3...
+\pagenumbering{arabic} % Đánh sốc thứ tự 1,2,3...
+
+\input{Intro}
+\newpage
 
 \input{Chap1}
 \newpage
@@ -37,8 +40,6 @@
 \input{Chap3}
 \newpage
 \input{Chap4}
-\newpage
-\input{Chap5}
 \newpage
 
 \phantomsection\addcontentsline{toc}{section}{\numberline {}REFERENCES}

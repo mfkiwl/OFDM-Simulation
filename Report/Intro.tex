@@ -1,0 +1,10 @@
+\section*{INTRODUCTION}
+\phantomsection\addcontentsline{toc}{section}{\numberline {}INTRODUCTION}
+
+In a single carrier communication system, the symbol period must be much greater than the delay time in order to avoid inter-symbol interference (ISI) \cite{b1}. Since data rate is inversely proportional to symbol period, having long symbol periods means low data rate and communication inefficiency. A multicarrier system, such as FDM (Frequency Division Multiplexing), divides the total available bandwidth in the spectrum into sub-bands for multiple carriers to transmit in parallel \cite{b2}. An overall high data rate can be achieved by placing carriers closely in the spectrum. However, inter-carrier interference (ICI) will occur due to a lack of spacing to separate the carriers. To avoid inter-carrier interference, guard bands will need to be placed in between any adjacent carriers, which results in a lowered data rate.
+
+OFDM (Orthogonal Frequency Division Multiplexing) is a multicarrier digital communication scheme to solve both issues. It combines a large number of low data rate carriers to construct a composite high data rate communication system. Orthogonality gives the carriers a valid reason to be closely spaced, even overlapped, without inter-carrier interference. Low data rate of each carrier implies long symbol periods, which greatly diminishes inter-symbol interference \cite{b3}.
+
+Although the idea of OFDM started back in 1966 \cite{b4}, it has never been widely utilized until the last decade when it “becomes the modem of choice in wireless applications” \cite{b5}. It is now interesting enough to experiment with some insides of OFDM.
+
+The objective of this project is to demonstrate the concept and feasibility of an OFDM system and investigate how its performance is changed by varying some of its major parameters. This objective is met by developing a Python program to simulate a basic OFDM system. From the process of this development, the mechanism of an OFDM system can be studied; and with a completed Python program, the characteristics of an OFDM system can be explored.
