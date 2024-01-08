@@ -37,10 +37,36 @@ Nowadays, single-carrier modulation technique is being use in satellite, GSM, CD
 \end{figure}
 
 \subsection{Multi-carrier modulation}
-Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth $B$ of the system is divided into a series of non-overlapping sub-carrier frequencies, each of which is used to carry a separate signal \cite{b2}. The overall concept of an multi-carrier transmission system is described in Figure \ref{fig:FDM}. Some advantages of Frequency Division Multiplexing including:
+Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth $B$ of the system is divided into a series of non-overlapping sub-carrier frequencies, each of which is used to carry a separate signal \cite{b2}. The overall concept of an multi-carrier transmission system is described in Figure \ref{fig:FDM}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/FDM}
+    \caption{Power spectral density of multi-carrier transmission system}
+    \label{fig:FDM}
+\end{figure}
+
+In Figure \ref{fig:FDM}, the data stream is transmitted on $N_C = 2L + 1$ parallel channels with a smaller bandwidth $f_s$:
+\begin{equation}
+    f_s = \frac{B}{N_C}
+\end{equation}
+
+The symbol duration is larger than before:
+
+\begin{equation}
+    T_{MC} = T_{SC} N_C
+\end{equation}
+
+This results in the ratio of the maximal time delay of the channel $\tau_{max}$ to the symbol duration $T_{MC}$ being much smaller compared to single-carrier modulation:
+
+\begin{equation}
+    R_{MC} = \frac{\tau_{max}}{T_{MC}} = \frac{R{SC}}{N_C}
+\end{equation}
+
+Thereby the affect of ISI is significantly reduced. Some addition advantages of Frequency Division Multiplexing including:
 \begin{itemize}
-    \item Efficient Use of Bandwidth: allows multiple signals to be transmitted over a single communication channel, which can lead to more efficient use of available bandwidth.
-    \item No Time Synchronization Required: FDM does not require precise time synchronization between the transmitting and receiving devices, making it easier to implement.
+    \item Allows multiple signals to be transmitted over a single communication channel, which can lead to more efficient use of available bandwidth.
+    \item The Frequency selectivity effect is reduced, meaning the channel impulse response affects just a few symbols.
     \item Low Implementation Cost: FDM is a relatively simple technique that does not require sophisticated hardware or software, making it less expensive to implement.
 \end{itemize}
 However, Frequency Division Multiplexing still has some drawbacks, such as: 
@@ -49,13 +75,6 @@ However, Frequency Division Multiplexing still has some drawbacks, such as:
     \item Interference: FDM can be susceptible to interference from other signals transmitted on nearby frequencies, which can degrade the quality of the transmitted signals.
     \item Difficulty in Assigning Frequencies: FDM requires careful assignment of frequencies to different signals to avoid interference, which can be a complex and time-consuming process.
 \end{itemize}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\linewidth]{Figures/FDM}
-    \caption{Power spectral density of multi-carrier transmission system}
-    \label{fig:FDM}
-\end{figure}
 
 An overall high data rate can be achieved by placing carriers closely in the spectrum. However, inter-carrier interference (ICI) will occur due to a lack of spacing to separate the carriers. To avoid inter-carrier interference, guard bands will need to be placed in between any adjacent carriers, which results in a lowered data rate. To address this issue, the 
 Orthogonal Frequency Division Multiplexing (OFDM) method was introduced.
