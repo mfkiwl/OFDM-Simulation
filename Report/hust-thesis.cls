@@ -15,6 +15,7 @@
 \RequirePackage{tikz}
 \RequirePackage{subcaption}
 \RequirePackage{pdfpages}
+\RequirePackage{nicefrac}
 
 \usetikzlibrary{calc}
 \RequirePackage{indentfirst}
