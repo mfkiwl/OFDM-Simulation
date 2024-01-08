@@ -26,11 +26,23 @@ To address these disadvantages, a multi-carrier system, such as FDM is developed
 
 \subsection{Multi-carrier modulation technique}
 
-Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth available in a communication medium is divided into a series of non-overlapping frequency bands, each of which is used to carry a separate signal \cite{b2}.
-An overall high data rate can be achieved by placing carriers closely in the spectrum. However, inter-carrier interference (ICI) will occur due to a lack of spacing to separate the carriers. To avoid inter-carrier interference, guard bands will need to be placed in between any adjacent carriers, which results in a lowered data rate.
+Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth available in a communication medium is divided into a series of non-overlapping frequency bands, each of which is used to carry a separate signal \cite{b2}. Some advantages of Frequency Division Multiplexing including:
+\begin{itemize}
+    \item Efficient Use of Bandwidth: allows multiple signals to be transmitted over a single communication channel, which can lead to more efficient use of available bandwidth.
+    \item No Time Synchronization Required: FDM does not require precise time synchronization between the transmitting and receiving devices, making it easier to implement.
+    \item Low Implementation Cost: FDM is a relatively simple technique that does not require sophisticated hardware or software, making it less expensive to implement.
+\end{itemize}
+However, Frequency Division Multiplexing still has some drawbacks, such as: 
+\begin{itemize}
+    \item Limited Capacity: FDM is limited in terms of the number of signals that can be transmitted over a single communication channel, which can be a disadvantage in applications where a large number of signals need to be transmitted.
+    \item Interference: FDM can be susceptible to interference from other signals transmitted on nearby frequencies, which can degrade the quality of the transmitted signals.
+    \item Difficulty in Assigning Frequencies: FDM requires careful assignment of frequencies to different signals to avoid interference, which can be a complex and time-consuming process.
+\end{itemize}
 
-\subsection{OFDM technique}
+An overall high data rate can be achieved by placing carriers closely in the spectrum. However, inter-carrier interference (ICI) will occur due to a lack of spacing to separate the carriers. To avoid inter-carrier interference, guard bands will need to be placed in between any adjacent carriers, which results in a lowered data rate. To address this issue, the 
+Orthogonal Frequency Division Multiplexing (OFDM) method was introduced.
 
+\subsection{Orthogonal Frequency Division Multiplexing modulation technique}
 \subsubsection{OFDM Definition}
 
 Orthogonal Frequency Division Multiplexing (OFDM) is a special case of the Frequency Division Multiplexing (FDM) technique \cite{OFDM2010}.
