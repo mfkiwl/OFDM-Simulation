@@ -66,14 +66,6 @@ Orthogonal Frequency Division Multiplexing (OFDM) is a special case of the Frequ
     \label{fig:OFDM}
 \end{figure}
 
-The key to OFDM is maintaining the orthogonality of the subcarriers. This is important because it prevents subcarriers from disturbing each other. If the integral of the product of two signals is zero over a time period, then these two signals are said to be orthogonal to each other. Two sinusoids with frequencies that are integer multiples of a common frequency can satisfy this criterion. The orthogonality is defined in Equation \ref{eq:orthogonality}
-
-\begin{equation}\label{eq:orthogonality}
-    \int_{0}^{T} cos(2 \pi n f_o t) cos(2 \pi m f_o t) \,dt = 0 \quad (n \neq m)
-\end{equation}
-
-Where $n$ and $m$ are two unequal integers; $f_o$ is the fundamental frequency; $T$ is the period over which the integration is taken. For OFDM, $T$ is one symbol period and $f_o$ set to to $\nicefrac{1}{T}$ for optimal effectiveness.
-
 Figure \ref{fig:sinx} illustrated the principle of the orthogonality, in which the spectrum of a single subcarrier signal has the form of a $sinc(x)$ function, defined in Equation \ref{eq:sinc}. The subcarriers are distributed evenly across the frequency range, ensuring that the peak points of one channel coincide with the null points of adjacent subcarrier channels. In the OFDM system, the signals, after passing through the digital modulator, undergo an Inverse Fast Fourier Transform (IFFT) to form OFDM symbols. The use of IFFT allows the OFDM modulator to simultaneously modulate multiple channels, a task that is challenging with FDM modulators.
 \begin{align}\label{eq:sinc}
     sinc(x) =
@@ -82,6 +74,14 @@ Figure \ref{fig:sinx} illustrated the principle of the orthogonality, in which t
         1 &\text{if} \quad x = 0
     \end{cases}
 \end{align}
+
+The key to OFDM is maintaining the orthogonality of the subcarriers. This is important because it prevents subcarriers from disturbing each other. If the integral of the product of two signals is zero over a time period, then these two signals are said to be orthogonal to each other. Two sinusoids with frequencies that are integer multiples of a common frequency can satisfy this criterion. The orthogonality is defined in Equation \ref{eq:orthogonality}
+
+\begin{equation}\label{eq:orthogonality}
+    \int_{0}^{T} cos(2 \pi n f_o t) cos(2 \pi m f_o t) \,dt = 0 \quad (n \neq m)
+\end{equation}
+
+Where $n$ and $m$ are two unequal integers; $f_o$ is the fundamental frequency; $T$ is the period over which the integration is taken. For OFDM, $T$ is one symbol period and $f_o$ set to to $\nicefrac{1}{T}$ for optimal effectiveness.
 
 \begin{figure}[htbp]
     \centering
