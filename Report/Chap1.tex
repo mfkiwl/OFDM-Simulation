@@ -75,7 +75,7 @@ Figure \ref{fig:sinx} illustrated the principle of the orthogonality, in which t
     \end{cases}
 \end{align}
 
-The key to OFDM is maintaining the orthogonality of the subcarriers. This is important because it prevents subcarriers from disturbing each other. If the integral of the product of two signals is zero over a time period, then these two signals are said to be orthogonal to each other. Two sinusoids with frequencies that are integer multiples of a common frequency can satisfy this criterion. The orthogonality is defined in Equation \ref{eq:orthogonality}
+The key to OFDM is maintaining the orthogonality of the subcarriers. This is important because it prevents subcarriers from disturbing each other and inter-carrier guard bands are not required \cite{wikiOFDM}. If the integral of the product of two signals is zero over a time period, then these two signals are said to be orthogonal to each other. Two sinusoids with frequencies that are integer multiples of a common frequency can satisfy this criterion. The orthogonality is defined in Equation \ref{eq:orthogonality}
 
 \begin{equation}\label{eq:orthogonality}
     \int_{0}^{T} cos(2 \pi n f_o t) cos(2 \pi m f_o t) \,dt = 0 \quad (n \neq m)
