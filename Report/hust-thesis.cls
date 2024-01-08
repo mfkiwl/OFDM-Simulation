@@ -89,3 +89,5 @@
 \emergencystretch=\maxdimen
 \hyphenpenalty=10000
 \hbadness=10000
+
+% \renewcommand{\floatpagefraction}{.8}%

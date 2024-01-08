@@ -7,7 +7,7 @@
 
 This chapter focuses on providing the theoretical foundations and background knowledge necessary to understand the concepts and methodologies discussed in the subsequent chapters of this project.
 
-\subsection{Single-carrier modulation technique}
+\subsection{Single-carrier modulation}
 % In Single-carrier modulation, only one Radio Frequency (RF) carrier is used to carry the information.
 In Single-carrier modulation, the signal is transmitted across the entire bandwidth $B$ \cite{OFDM2006}, meaning that the system's sampling frequency is equal to the bandwidth, and each signal has a length of:
 \begin{equation}
@@ -31,7 +31,7 @@ In Equation \ref{eq:single-carrier}, $T_{SC}$ is the duration of a signal sample
 
 To address these disadvantages, a multi-carrier system, such as FDM is developed.
 
-\subsection{Multi-carrier modulation technique}
+\subsection{Multi-carrier modulation}
 
 Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth available in a communication medium is divided into a series of non-overlapping frequency bands, each of which is used to carry a separate signal \cite{b2}. The overall concept of an multi-carrier transmission system is described in Figure \ref{fig:FDM}. Some advantages of Frequency Division Multiplexing including:
 \begin{itemize}
@@ -56,7 +56,7 @@ However, Frequency Division Multiplexing still has some drawbacks, such as:
 An overall high data rate can be achieved by placing carriers closely in the spectrum. However, inter-carrier interference (ICI) will occur due to a lack of spacing to separate the carriers. To avoid inter-carrier interference, guard bands will need to be placed in between any adjacent carriers, which results in a lowered data rate. To address this issue, the 
 Orthogonal Frequency Division Multiplexing (OFDM) method was introduced.
 
-\subsection{Orthogonal Frequency Division Multiplexing modulation technique}
+\subsection{Orthogonal Frequency Division Multiplexing modulation}
 Orthogonal Frequency Division Multiplexing (OFDM) is a special case of the Frequency Division Multiplexing (FDM) technique \cite{OFDM2010}, with one crucial difference: the subcarriers in frequency domain are overlapping. More specifically, the subcarriers are orthogonal to each other, as described in Figure \ref{fig:OFDM}.
 
 \begin{figure}[htbp]
