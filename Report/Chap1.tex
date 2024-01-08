@@ -19,11 +19,15 @@ In Single-carrier modulation, the signal is transmitted across the entire bandwi
 In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured in seconds (s); $B$ is the total bandwidth of the system, measured in Hertz (Hz). The power spectral density of single-carrier transmission system is described in Figure \ref{fig:single-carrier}, in which the entire system is modulated with the carrier signal $f_0$. In broadband wireless communication, the radio channel is usually frequency selective, meaning that the channel impulse response varies with frequency. The sampling frequency is very high, resulting in the sample duration $T_{SC}$ being very small, therefore single-carrier modulation technique has several disadvantages:
 
 \begin{itemize}
-    \item Inter-symbol interference (ISI) due to multipath fading. The symbol period $T_{SC}$ must be much greater than maximal time delay $\tau_{max}$ in order to avoid ISI.
+    \item Inter-symbol interference (ISI), caused by multipath fading. This is because the ratio of the maximal time delay of the channel $\tau_{max}$ to the symbol duration $T_{SC}$:
+    \begin{equation}
+        R_{SC} = \frac{\tau_{max}}{T_{SC}} = R_{ISI}
+    \end{equation}
+    This ratio is much larger compared to multi-carrier modulation. The symbol period $T_{SC}$ must be much greater than maximal time delay $\tau_{max}$ in order to avoid ISI at the receiver.
     \item Low data rate: since data rate is inversely proportional to symbol period, having long symbol periods means low data rate and communication inefficiency.
 \end{itemize}
 
-To address these disadvantages, a multi-carrier system, such as FDM is developed.
+Nowadays, single-carrier modulation technique is being use in satellite, GSM, CDMA, HF and other narrowband communication systems. In broadband communications, multi-carrier system, such as FDM is developed to address the disadvantages discussed above.
 
 \begin{figure}[htbp]
     \centering
