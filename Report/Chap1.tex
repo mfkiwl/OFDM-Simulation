@@ -74,7 +74,14 @@ The key to OFDM is maintaining the orthogonality of the subcarriers. This is imp
 
 Where $n$ and $m$ are two unequal integers; $f_o$ is the fundamental frequency; $T$ is the period over which the integration is taken. For OFDM, $T$ is one symbol period and $f_o$ set to to $\frac{1}{T}$ for optimal effectiveness.
 
-Figure \ref{fig:sinx} \cite{OFDM2010} illustrated a simple system of subcarrier waves of a $\frac{sin(x)}{x}$ signal. The subcarriers are distributed evenly across the frequency range, ensuring that the peak points of one channel coincide with the null points of adjacent subcarrier channels. In the OFDM system, the signals, after passing through the digital modulator, undergo an Inverse Fast Fourier Transform (IFFT) to form OFDM symbols. The use of IFFT allows the OFDM modulator to simultaneously modulate multiple channels, a task that is challenging with FDM modulators.
+Figure \ref{fig:sinx} illustrated the principle of the orthogonality, in which the spectrum of a single subcarrier signal has the form of a $sinc(x)$ function, defined in Equation \ref{eq:sinc}. The subcarriers are distributed evenly across the frequency range, ensuring that the peak points of one channel coincide with the null points of adjacent subcarrier channels. In the OFDM system, the signals, after passing through the digital modulator, undergo an Inverse Fast Fourier Transform (IFFT) to form OFDM symbols. The use of IFFT allows the OFDM modulator to simultaneously modulate multiple channels, a task that is challenging with FDM modulators.
+\begin{align}\label{eq:sinc}
+    sinc(x) =
+    \begin{cases}
+        \frac{sin(x)}{x} &\text{if} \quad x \neq 0\\
+        1 &\text{if} \quad x = 0
+    \end{cases}
+\end{align}
 
 \begin{figure}[htbp]
     \centering
