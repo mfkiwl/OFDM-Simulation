@@ -5,18 +5,6 @@
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
-\subsection{OFDM Modulation method}
-OFDM modulation is based on the FDM technique, with the key distinction that the subcarrier waves are placed orthogonally to each other. With this orthogonality, their signal spectra overlap without affecting the demodulation process at the receiver. The signal spectrum of a system of subcarrier waves is illustrated in Figure \ref{Spectrum} \cite{b6}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\textwidth]{Figures/Spectrum}
-    \caption{Spectrum of a single subcarrier (left) and 5 subcarriers (right)}
-    \label{Spectrum}
-\end{figure}
-
-As shown in Figure \ref{Spectrum} \cite{OFDM2010}, the signal spectrum of each subcarrier channel has the form of $\frac{sin(x)}{x}$. The subcarriers are distributed evenly across the frequency range, ensuring that the peak points of one channel coincide with the null points of adjacent subcarrier channels. In the OFDM system, the signals, after passing through the digital modulator, undergo an Inverse Fast Fourier Transform (IFFT) to form OFDM symbols. The use of IFFT allows the OFDM modulator to simultaneously modulate multiple channels, a task that is challenging with FDM modulators.
-
 \subsection{OFDM system architechure}
 Figure \ref{diagram} shows a block diagram of our generic OFDM system.
 
