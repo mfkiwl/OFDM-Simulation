@@ -16,15 +16,7 @@ In Single-carrier modulation, the signal is transmitted across the entire bandwi
     \label{eq:single-carrier}
 \end{equation}
 
-In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured in seconds (s); $B$ is the total bandwidth of the system, measured in Hertz (Hz). The power spectral density of single-carrier transmission system is described in Figure \ref{fig:single-carrier}. In broadband wireless communication, the radio channel is usually frequency selective, and the sampling frequency is very high, resulting in the sample duration $T_{SC}$ being very small. Therefore single-carrier modulation technique has several disadvantages:
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\linewidth]{Figures/single_carrier}
-    \caption{Power spectral density of single-carrier transmission system}
-    \label{fig:single-carrier}
-\end{figure}
-
+In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured in seconds (s); $B$ is the total bandwidth of the system, measured in Hertz (Hz). The power spectral density of single-carrier transmission system is described in Figure \ref{fig:single-carrier}, in which the entire system is modulated with the carrier signal $f_0$. In broadband wireless communication, the radio channel is usually frequency selective, meaning that the channel impulse response varies with frequency. The sampling frequency is very high, resulting in the sample duration $T_{SC}$ being very small, therefore single-carrier modulation technique has several disadvantages:
 
 \begin{itemize}
     \item Large Inter-symbol interference (ISI): The symbol period must be much greater than the delay time in order to avoid ISI.
@@ -32,6 +24,13 @@ In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured i
 \end{itemize}
 
 To address these disadvantages, a multi-carrier system, such as FDM is developed.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/single_carrier}
+    \caption{Power spectral density of single-carrier transmission system}
+    \label{fig:single-carrier}
+\end{figure}
 
 \subsection{Multi-carrier modulation}
 
