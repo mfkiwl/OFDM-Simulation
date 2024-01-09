@@ -5,7 +5,7 @@
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
-This chapter delves into designing an OFDM system. A combination of Python and Jupyter notebook is utilized to implement and simulate the designed. A full notebook can be seen in the Appendix. 
+This chapter delves into designing an OFDM system. A combination of Python and Jupyter Notebook is utilized to implement and simulate the design. A full notebook can be seen in the Appendix. 
 % In this project, we utilized the power of Python and the convenient jupyter notebook to simulate the 64 QAM OFDM system. A full notebook can be seen in the Appendix.
 
 \subsection{System architecture}
@@ -22,7 +22,7 @@ Principles of operation for each block:
 \begin{itemize}
     \item S2P (Serial to Parallel): Converts serial data into parallel data, splitting high-speed bit streams into K lower-speed bit streams, where K is the number of subcarrier waves in the system.
     \item Mapping: QAM modulation to map pairs of bits into complex-valued constellation symbols according to the mapping\_table.
-    \item IFFT(Inverse Fast Fourier Transform): Performs a fast implementation of the Inverse Discrete Fourier Transform, transforming signals from the time domain to the frequency domain, creating orthogonal subcarrier waves.
+    \item IFFT(Inverse Fast Fourier Transform): Performs a fast implementation of the Inverse Discrete Fourier Transform, transforming signals from the time domain to the frequency domain, and creating orthogonal subcarrier waves.
     \item P2S (Parallel to Serial): Converts parallel data back to serial, returning the signal stream to its original continuous form for transmission.
     \item Add CP:  This operation concatenates a copy of the last CP samples of the OFDM time domain signal to the beginning. This way, a cyclic extension is achieved.
     \item Channel: The wireless channel between transmitter and receiver. Here, we use a simple two-tap multipath channel.
@@ -38,7 +38,7 @@ Principles of operation for each block:
 \begin{enumerate}
     \item $K = 64$ : The number of subcarriers, describes how many subcarriers are available in the OFDM system.
     \item $CP = K//$4 : The length of the cyclic prefix, denotes the number of samples that are copied from the end of the modulated block to the beginning, to yield a cyclic extension of the block.
-    \item $P = 8$ : The number of pilots in the OFDM symbol, describes how many carriers are used to transmit known information (i.e. pilots). Pilots will be used at the receiver to estimate the wireless channel between transmitter and receiver.
+    \item $P = 8$ : The number of pilots in the OFDM symbol, describes how many carriers are used to transmit known information (i.e. pilots). Pilots will be used at the receiver to estimate the wireless channel between the transmitter and receiver.
     \item $pilotValue = 3+3j$ : The known value each pilot transmits.
     \item $\mu = 6$ :Since we simulating 64QAM transmission, we need to define $\mu = \log_{2} 64$ bits per symbol
     \item $SNRDB = 20$ : Signal-to-Noise Ratio in dB, that should occur at the receiver.
@@ -53,7 +53,7 @@ After that, we need to define some index sets that describe which carriers trans
     \label{carrier_index}
 \end{figure}
 
-Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol shall be defined in mapping table.
+Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol shall be defined in the mapping table.
 
 \begin{figure}[htbp]
     \centering
@@ -62,9 +62,9 @@ Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol s
     \label{mapping}
 \end{figure}
 
-In Figure \ref{mapping}, we have plotted the 64-QAM constellation, along with the bit-labels. In Gray-mapping, two adjacent constellation symbols differ only by one bit and the other 5 bits remain the same. This technique helps to minimize bit-errors, in case a wrong constellation symbol is detected: Most probably, symbol errors are "off-by-one" errors, i.e. a symbol next to the correct symbol is detected. Then, only a single bit-error occurs.
+In Figure \ref{mapping}, we have plotted the 64-QAM constellation, along with the bit-labels. In Gray-mapping, two adjacent constellation symbols differ only by one bit and the other 5 bits remain the same. This technique helps to minimize bit-errors, in case a wrong constellation symbol is detected: Most probably, symbol errors are "off-by-one" errors, i.e. a symbol next to the correct symbol is detected. Then, only a single-bit error occurs.
 
-Let us now define the wireless channel between transmitter and receiver. Here, we use a simple two-tap multipath channel with given impulse response channelResponse. Also, we plot the corresponding frequency response. As seen in Figure \ref{channel}, the channel is frequency-selective.
+Let us now define the wireless channel between transmitter and receiver. Here, we use a simple two-tap multipath channel with a given impulse channel response. Also, we plot the corresponding frequency response. As seen in Figure \ref{channel}, the channel is frequency-selective.
 
 \begin{figure}[htbp]
     \centering

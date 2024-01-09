@@ -5,7 +5,7 @@
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
-This chapter focuses on providing a theoretical theoretical foundations and background knowledge necessary for understanding the concepts and methodologies discussed in the subsequent chapters of this project, including : single-carrier modulation, FDM, OFDM, CP. 
+This chapter focuses on providing the theoretical foundations and background knowledge necessary for understanding the concepts and methodologies discussed in the subsequent chapters of this project, including single-carrier modulation, FDM, OFDM, and CP. 
 
 \subsection{Single-carrier modulation}
 % In digital communications, information is expressed in the form of bits. The term symbol refers to a collection, in various sizes, of bits \cite{Litwin2001}.
@@ -16,7 +16,7 @@ In Single-carrier modulation, the signal is transmitted across the entire bandwi
     \label{eq:single-carrier}
 \end{equation}
 
-In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured in seconds (s); $B$ is the total bandwidth of the system, measured in Hertz (Hz). The power spectral density of single-carrier transmission system is described in Figure \ref{fig:single-carrier}, in which the entire system is modulated with the carrier signal $f_0$. In broadband wireless communication, the radio channel is usually frequency selective, meaning that the channel impulse response varies with frequency. The sampling frequency is very high, resulting in the sample duration $T_{SC}$ being very small, therefore single-carrier modulation technique has several disadvantages:
+In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured in seconds (s); $B$ is the total bandwidth of the system, measured in Hertz (Hz). The power spectral density of the single-carrier transmission system is described in Figure \ref{fig:single-carrier}, in which the entire system is modulated with the carrier signal $f_0$. In broadband wireless communication, the radio channel is usually frequency-selective, meaning that the channel impulse response varies with frequency. The sampling frequency is very high, resulting in the sample duration $T_{SC}$ being very small, therefore single-carrier modulation technique has several disadvantages:
 
 \begin{itemize}
     \item Inter-symbol interference (ISI), caused by multipath fading. This is because the ratio of the maximal time delay of the channel $\tau_{max}$ to the symbol duration $T_{SC}$:
@@ -24,10 +24,10 @@ In Equation \ref{eq:single-carrier}, $T_{SC}$ is the symbol duration, measured i
         R_{SC} = \frac{\tau_{max}}{T_{SC}} = R_{ISI}
     \end{equation}
     This ratio is much larger compared to multi-carrier modulation. The symbol period $T_{SC}$ must be much greater than maximal time delay $\tau_{max}$ in order to avoid ISI at the receiver.
-    \item Low data rate: since data rate is inversely proportional to symbol period, having long symbol periods means low data rate and communication inefficiency.
+    \item Low data rate: since the data rate is inversely proportional to the symbol period, having long symbol periods means low data rate and communication inefficiency.
 \end{itemize}
 
-Nowadays, single-carrier modulation technique is being use in satellite, GSM, CDMA, HF and other narrowband communication systems \cite{rfwireless}. In broadband communications, multi-carrier system, such as FDM is developed to address the disadvantages discussed above.
+Nowadays, the single-carrier modulation technique is being used in satellite, GSM, CDMA, HF and other narrowband communication systems \cite{rfwireless}. In broadband communications, a multi-carrier system, such as FDM is developed to address the disadvantages discussed above.
 
 \begin{figure}[htbp]
     \centering
@@ -37,7 +37,7 @@ Nowadays, single-carrier modulation technique is being use in satellite, GSM, CD
 \end{figure}
 
 \subsection{Multi-carrier modulation}
-Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth $B$ of the system is divided into a series of non-overlapping sub-carrier frequencies, each of which is used to carry a separate signal \cite{b2}. The overall concept of an multi-carrier transmission system is described in Figure \ref{fig:FDM}.
+Frequency division multiplexing (FDM) is a multi-carrier modulation technique by which the total bandwidth $B$ of the system is divided into a series of non-overlapping sub-carrier frequencies, each of which is used to carry a separate signal \cite{b2}. The overall concept of a multi-carrier transmission system is described in Figure \ref{fig:FDM}.
 
 \begin{figure}[htbp]
     \centering
@@ -63,7 +63,7 @@ This results in the ratio of the maximal time delay of the channel $\tau_{max}$ 
     R_{MC} = \frac{\tau_{max}}{T_{MC}} = \frac{R_{SC}}{N_C}
 \end{equation}
 
-Thereby the affect of ISI is significantly reduced. Some addition advantages of Frequency Division Multiplexing including:
+Thereby the effect of ISI is significantly reduced. Some additional advantages of Frequency Division Multiplexing include:
 \begin{itemize}
     \item Allows multiple signals to be transmitted over a single communication channel, which can lead to more efficient use of available bandwidth.
     \item The Frequency selectivity effect is reduced, meaning the channel impulse response affects just a few symbols.
@@ -78,7 +78,7 @@ However, Frequency Division Multiplexing still has some drawbacks, such as:
 An overall high data rate can be achieved by placing carriers closely in the spectrum. However, inter-carrier interference (ICI) will occur due to a lack of spacing to separate the carriers \cite{ICI}. To avoid inter-carrier interference, guard bands will need to be placed in between any adjacent carriers, which results in a lowered data rate. To address this issue, the Orthogonal Frequency Division Multiplexing (OFDM) method was introduced.
 
 \subsection{Orthogonal Frequency Division Multiplexing modulation}
-Orthogonal Frequency Division Multiplexing (OFDM) is a special case of the Frequency Division Multiplexing (FDM) technique \cite{OFDM2010}, with one crucial difference: the subcarriers in frequency domain are overlapping. More specifically, the subcarriers are orthogonal to each other, as described in Figure \ref{fig:OFDM}.
+Orthogonal Frequency Division Multiplexing (OFDM) is a special case of the Frequency Division Multiplexing (FDM) technique \cite{OFDM2010}, with one crucial difference: the subcarriers in the frequency domain are overlapping. More specifically, the subcarriers are orthogonal to each other, as described in Figure \ref{fig:OFDM}.
 
 \begin{figure}[htbp]
     \centering
@@ -119,7 +119,7 @@ The key to OFDM is maintaining the orthogonality of the subcarriers. This is imp
     \int_{0}^{T} cos(2 \pi n f_o t) cos(2 \pi m f_o t) \,dt = 0 \quad (n \neq m)
 \end{equation}
 
-Where $n$ and $m$ are two unequal integers; $f_o$ is the fundamental frequency; $T$ is the period over which the integration is taken. For OFDM, $T$ is one symbol period and $f_o$ set to to $\nicefrac{1}{T}$ for optimal effectiveness.
+Where $n$ and $m$ are two unequal integers; $f_o$ is the fundamental frequency; $T$ is the period over which the integration is taken. For OFDM, $T$ is one symbol period and $f_o$ is set to $\nicefrac{1}{T}$ for optimal effectiveness.
 
 % Upgrading and optimizing algorithms,
 OFDM systems provide highly advantageous features for wireless transmission and transceiver system design:
@@ -138,12 +138,12 @@ However, OFDM technology also has its drawbacks that need careful consideration 
 These challenges require careful consideration and research to optimize the performance of the OFDM system under real-world conditions and ensure that the drawbacks do not significantly affect transmission quality
 
 \subsection{Cyclic Prefix}
-Cyclic Prefix (also known as Guard Interval) refers to the prefixing of a symbol with a repetition of the end (hence the word cyclic). The concept of a cyclic prefix is traditionally associated with OFDM systems, however the cyclic prefix is now also used in single carrier systems to improve the robustness to multipath propagation \cite{CP}. The receiver is typically configured to discard the cyclic prefix samples, but the cyclic prefix serves two purposes:
+Cyclic Prefix (also known as Guard Interval) refers to the prefixing of a symbol with a repetition of the end (hence the word cyclic). The concept of a cyclic prefix is traditionally associated with OFDM systems, however, the cyclic prefix is now also used in single carrier systems to improve the robustness of multipath propagation \cite{CP}. The receiver is typically configured to discard the cyclic prefix samples, but the cyclic prefix serves two purposes:
 \begin{itemize}
     \item It provides a guard interval to eliminate intersymbol interference from the previous symbol.
     \item It repeats the end of the symbol so the linear convolution of a frequency-selective multipath channel can be modeled as circular convolution, which in turn may transform to the frequency domain via a discrete Fourier transform. This approach accommodates simple frequency domain processing, such as channel estimation and equalization.
 \end{itemize}
-Figure \ref{fig:cp} \cite{CP2} illustrated two OFDM symbols, each having a dedicated CP. The colors encode the signal value. The cyclic prefix at the beginning of each OFDM symbol shows a copy of the color of end of the OFDM symbol.
+Figure \ref{fig:cp} \cite{CP2} illustrated two OFDM symbols, each having a dedicated CP. The colors encode the signal value. The cyclic prefix at the beginning of each OFDM symbol shows a copy of the end of the OFDM symbol.
 
 \begin{figure}[htbp]
     \centering
@@ -152,7 +152,7 @@ Figure \ref{fig:cp} \cite{CP2} illustrated two OFDM symbols, each having a dedic
     \label{fig:cp}
 \end{figure}
 
-Having a long symbol periods diminish the probability of having ISI, but could not eliminate it. Suppose the length of each OFDM symbol (without CP) is $T_S$, the length of Cyclic Prefix is $T_G$ and the length of OFDM symbol (with CP) is $T$. The length of Cyclic Prefix $T_G$ must be longer than the maximal time delay of the channel : $T_G \geq \tau_{max}$ to make ISI nearly eliminated.
+Having a long symbol period diminishes the probability of having ISI, but could not eliminate it. Suppose the length of each OFDM symbol (without CP) is $T_S$, the length of Cyclic Prefix is $T_G$ and the length of the OFDM symbol (with CP) is $T$. The length of Cyclic Prefix $T_G$ must be longer than the maximal time delay of the channel: $T_G \geq \tau_{max}$ to make ISI nearly eliminated.
 % OFDM data are generated by taking symbols in the spectral space using M-PSK, QAM, etc, and convert the spectra to time domain by taking the Inverse Discrete Fourier Transform (IDFT). Since Inverse Fast Fourier Transform (IFFT) is more cost effective to implement, it is usually used instead \cite{b3}. Once the OFDM data are modulated to time signal, all carriers transmit in parallel to fully occupy the available frequency bandwidth.
 
 % An exact copy of a fraction of the cycle, typically 25\% of the cycle, taken from the end is added to the front. This allows the demodulator to capture the symbol period with an uncertainty of up to the length of a cyclic extension and still obtain the correct information for the entire symbol period.

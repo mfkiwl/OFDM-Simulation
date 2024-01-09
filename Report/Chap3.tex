@@ -5,10 +5,10 @@
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
-Chapter 3 focuses on presenting the simulation resuls of the designed OFDM system and also do some analyses of the performance and characteristics of the system.
+Chapter 3 focuses on presenting the simulation results of the designed OFDM system and also provides some analyses of the performance and characteristics of the system.
 
 \subsection{OFDM Transmitter}
-Now, that we have defined the necessary parameters for our OFDM example, we need some data for testing. Here we using a 3 channel 256x256 bitmap image (Figure \ref{input}).
+Now, that we have defined the necessary parameters for our OFDM example, we need some data for testing. Here we're using a 3 channel 256x256 bitmap image (Figure \ref{input}).
 
 \begin{figure}[htbp]
     \centering
@@ -17,9 +17,9 @@ Now, that we have defined the necessary parameters for our OFDM example, we need
     \label{input}
 \end{figure}
 
-The program reads data from an input image file and obtains all the pixels value (from all 3 channels). This matrix is then rearranged into a 1D array. This array is gonna have a size of $width*height*channel = 256*256*3 = 196608$ (bytes).
+The program reads data from an input image file and obtains all the pixel values (from all 3 channels). This matrix is then rearranged into a 1D array. This array is gonna have a size of $width*height*channel = 256*256*3 = 196608$ (bytes).
 
-Subsequently, we add the CRC (Cyclic redundancy check) \cite{crc} to the end of each byte. The CRC is serve as a way to check for errors. Basically, the  generator at the transmitter consists of 4 steps:
+Subsequently, we add the CRC (Cyclic redundancy check) \cite{crc} to the end of each byte. The CRC serves as a way to check for errors. Basically, the  generator at the transmitter consists of 4 steps:
 
 \begin{enumerate}
     \item Find the length of the devisor (key) $L$
@@ -28,11 +28,9 @@ Subsequently, we add the CRC (Cyclic redundancy check) \cite{crc} to the end of 
     \item Remainder of the division = $CRC$
 \end{enumerate}
 
-Since we choose the key value of 1101. We add 3 bits to each bytes. Next we group the bits into groups of size $\mu * data\_carriers$, which in this case, equals 714. The `bits` are now sent to a serial-to-parallel converter, which groups the bits for the OFDM frame into a groups of $\mu$ bits (i.e. one group for each subcarrier).
+Since we choose the key value of 1101. We add 3 bits to each byte. Next, we group the bits into groups of size $\mu * data\_carriers$, which in this case, equals 714. The `bits` are now sent to a serial-to-parallel converter, which groups the bits for the OFDM frame into groups of $\mu$ bits (i.e. one group for each subcarrier). The bits groups are then sent to the mapper. The mapper converts the groups into complex-valued constellation symbols according to the mapping\_table (Figure \ref{mapping}).
 
-These bits are now sent to a serial-to-parallel converter, which groups the bits for the OFDM frame into a groups of $\mu$ bits (i.e. one group for each subcarrier). The bits groups are then sent to the mapper. The mapper converts the groups into complex-valued constellation symbols according to the mapping\_table (Figure \ref{mapping}).
-
-The next step is the allocation of different subcarriers with data and pilots. For each subcarrier we have defined wether it carries data or a pilot by the arrays dataCarriers and pilotCarriers. Now, to create the overall OFDM data, we need to put the data and pilots into the OFDM carriers. Now, the OFDM carriers contained in OFDM\_data can be transformed to the time-domain by means of the IDFT operation. Figure \ref{time-domain} and \ref{freq-domain} show the plot of OFDM\_data in time domain and frequency respectively.
+The next step is the allocation of different subcarriers with data and pilots. For each sub-carrier, we have defined whether it carries data or a pilot by the arrays dataCarriers and pilotCarriers. Now, to create the overall OFDM data, we need to put the data and pilots into the OFDM carriers. Now, the OFDM carriers contained in OFDM\_data can be transformed to the time domain using the IDFT operation. Figure \ref{time-domain} and \ref{freq-domain} show the plot of OFDM\_data in time domain and frequency respectively.
 
 \begin{figure}[htbp]
     \centering
@@ -64,7 +62,7 @@ Subsequently, we add a cyclic prefix to the symbol. This operation concatenates 
 %     \item Number of OFDM samples in time domain with CP: 160
 % \end{itemize}
 
-Now, the signal is sent to the antenna and sent over the air to the receiver. In between both antennas, there is the wireless channel. We model this channel as a static multipath channel with impulse response channelResponse. Hence, the signal at the receive antenna is the convolution of the transmit signal with the channel response. Additionally, we add some noise to the signal according to the given SNR value. Figure \ref{tx_rx} shows the TX and RX signal with SNRDB = 20db.
+Now, the signal is sent to the antenna and sent over the air to the receiver. In between both antennas, there is the wireless channel. We model this channel as a static multipath channel with impulse channel response. Hence, the signal at the receive antenna is the convolution of the transmit signal with the channel response. Additionally, we add some noise to the signal according to the given SNR value. Figure \ref{tx_rx} shows the TX and RX signal with SNRDB = 20db.
 
 \begin{figure}[htbp]
     \centering
@@ -75,11 +73,11 @@ Now, the signal is sent to the antenna and sent over the air to the receiver. In
 
 \subsection{OFDM Receiver}
 
-Now, at the receiver the CP is removed from the signal and a window of $K$ samples is extracted from the received signal. Afterwards, the signal is transformed back to the frequency domain, in order to have the received value on each subcarrier available.
+Now, at the receiver, the CP is removed from the signal and a window of $K$ samples is extracted from the received signal. Afterwards, the signal is transformed back to the frequency domain, in order to have the received value on each subcarrier available.
 
 The principle of channel estimation is as follows:
 
-The transmit signal contains pilot values at certain pilot carriers. These pilot values and their position in the frequency domain (i.e. the pilot carrier index) are known to the receiver. From the received information at the pilot subcarriers, the receiver can estimate the effect of the wireless channel onto this subcarrier (because it knows what was transmitted and what was received). Hence, the receiver gains information about the wireless channel at the pilot carriers. However, it wants to know what happened at the data carriers. To achieve this, it interpolates the channel values between the pilot carriers to get an estimate of the channel in the data carriers.
+The transmit signal contains pilot values at certain pilot carriers. These pilot values and their position in the frequency domain (i.e. the pilot carrier index) are known to the receiver. From the received information at the pilot subcarriers, the receiver can estimate the effect of the wireless channel on this subcarrier (because it knows what was transmitted and what was received). Hence, the receiver gains information about the wireless channel at the pilot carriers. However, it wants to know what happened at the data carriers. To achieve this, it interpolates the channel values between the pilot carriers to get an estimate of the channel in the data carriers.
 
 \begin{figure}[htbp]
     \centering
@@ -97,7 +95,7 @@ Now that the channel is estimated at all carriers, we can use this information i
     \label{received}
 \end{figure}
 
-Now, that the constellation is obtained back, we need to send the complex values to the demapper, to transform the constellation points to the bit groups. In order to do this, we compare each received constellation point against each possible constellation point and choose the constellation point which is closest to the received point. Then, we return the bit-group that belongs to this point. In the Figure \ref{hard-decision}, the blue points are the received QAM points, where as the the red points connected to them are the closest possible constellation points, and the bit groups corresponding to these red points are returned.
+Now, that the constellation is obtained back, we need to send the complex values to the demapper, to transform the constellation points to the bit groups. In order to do this, we compare each received constellation point against each possible constellation point and choose the constellation point that is closest to the received point. Then, we return the bit-group that belongs to this point. In Figure \ref{hard-decision}, the blue points are the received QAM points, whereas the red points connected to them are the closest possible constellation points, and the bit groups corresponding to these red points are returned.
 
 \begin{figure}[htbp]
     \centering
@@ -106,7 +104,7 @@ Now, that the constellation is obtained back, we need to send the complex values
     \label{hard-decision}
 \end{figure}
 
-Finally, the bit groups need to be converted to a serial stream of bits, by means of parallel to serial conversion. Figure \ref{output} show The received data for 4 cases of SRN equals 0, 10, 20 and 30 db respectively. Additionally, Table \ref{errors} show the calculated error bits using CRC check.
+Finally, the bit groups need to be converted to a serial stream of bits, by means of parallel to serial conversion. Figure \ref{output} shows The received data for 4 cases of SRN equals 0, 10, 20 and 30 dB respectively. Additionally, Table \ref{errors} shows the calculated error bits using CRC check.
 
 \begin{figure}[htbp]
     \centering
@@ -152,8 +150,8 @@ Finally, the bit groups need to be converted to a serial stream of bits, by mean
 \end{table}
 
 \subsection{Error Calculations}
-For further analysis, we the varying SNRDB from 0 to 40 db and then calculating the error bits using CRC decode. Dividing the total number of errors by total number of
-demodulated symbols, the bit-error-rate (BER) is found. Figure \ref{ber} show the plot of BER with respecte to SNR.
+For further analysis, we the varying SNRDB from 0 to 40 dB and then calculated the error bits using CRC decode. Dividing the total number of errors by total number of
+demodulated symbols, the bit-error rate (BER) is found. Figure \ref{ber} shows the plot of BER with respect to SNR.
 
 \begin{figure}[htbp]
     \centering
