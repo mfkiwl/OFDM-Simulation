@@ -67,13 +67,13 @@ def IFFT(OFDM_data):
     return np.fft.ifft(OFDM_data)
 
 
-def addCP(OFDM_time, CP):
-    cp = OFDM_time[-CP:]               # take the last CP samples ...
-    return np.hstack([cp, OFDM_time])  # add them to the beginning
+def addCP(symbol, CP):
+    cp = symbol[-CP:]               # take the last CP samples ...
+    return np.hstack([cp, symbol])  # append them to the beginning
 
 
-def removeCP(signal, CP, K):
-    return signal[CP:(CP+K)]
+def removeCP(symbol, CP, K):
+    return symbol[CP:(CP+K)]
 
 
 def equalize(OFDM_demod, Hest):
