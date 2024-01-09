@@ -1,9 +1,11 @@
-\section*{CHAPTER 2:  DESIGN AND IMPLEMENTATION}
+\section*{CHAPTER 2: DESIGN AND IMPLEMENTATION}
 \addcontentsline{toc}{section}{\numberline{}CHAPTER 2: DESIGN AND IMPLEMENTATION}
 \setcounter{section}{2}
 \setcounter{subsection}{0}
 \setcounter{figure}{0}
 \setcounter{table}{0}
+
+In this project, we utilized the power of Python and the convenient jupyter notebook to simulate the 64 QAM OFDM system. A full notebook can be seen in the Appendix.
 
 \subsection{OFDM system architechure}
 Figure \ref{diagram} shows a block diagram of our generic OFDM system.
@@ -29,5 +31,45 @@ Principles of operation for each block:
     \item Equalize: For each subcarrier, the influence of the channel is removed such that we get the clear (only noisy) constellation symbols back.
     \item Demapping: Transform the constellation points to the pairs of bits according to the demapping\_table. The demapping table is simply the inverse mapping of the mapping\_table.
 \end{itemize}
+
+\subsection{Configurations and Parameters set up}
+
+\begin{enumerate}
+    \item $K = 64$ : The number of subcarriers, describes how many subcarriers are available in the OFDM system.
+    \item $CP = K//$4 : The length of the cyclic prefix, denotes the number of samples that are copied from the end of the modulated block to the beginning, to yield a cyclic extension of the block.
+    \item $P = 8$ : The number of pilots in the OFDM symbol, describes how many carriers are used to transmit known information (i.e. pilots). Pilots will be used at the receiver to estimate the wireless channel between transmitter and receiver.
+    \item $pilotValue = 3+3j$ : The known value each pilot transmits.
+    \item $\mu = 6$ :Since we simulating 64QAM transmission, we need to define $\mu = \log_{2} 64$ bits per symbol
+    \item $SNRDB = 20$ : Signal-to-Noise Ratio in dB, that should occur at the receiver.
+\end{enumerate}
+
+After that, we need to define some index sets that describe which carriers transmit pilots and which carriers contain payload.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{../Source/results/carrier_index}
+    \caption{The Carriers transmit pilots and which carriers contain payload}
+    \label{carrier_index}
+\end{figure}
+
+Furthermore, the mapping from groups of 6 bits to a 64QAM constellation symbol shall be defined in mapping table.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../Source/results/mapping}
+    \caption{64-QAM Constellation with gray-mapping}
+    \label{mapping}
+\end{figure}
+
+In Figure \ref{mapping}, we have plotted the 64-QAM constellation, along with the bit-labels. In Gray-mapping, two adjacent constellation symbols differ only by one bit and the other 5 bits remain the same. This technique helps to minimize bit-errors, in case a wrong constellation symbol is detected: Most probably, symbol errors are "off-by-one" errors, i.e. a symbol next to the correct symbol is detected. Then, only a single bit-error occurs.
+
+Let us now define the wireless channel between transmitter and receiver. Here, we use a simple two-tap multipath channel with given impulse response channelResponse. Also, we plot the corresponding frequency response. As seen in Figure \ref{channel}, the channel is frequency-selective.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../Source/results/channel}
+    \caption{64-QAM Constellation with gray-mapping}
+    \label{channel}
+\end{figure}
 
 \newpage
