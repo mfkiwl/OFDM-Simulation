@@ -26,7 +26,7 @@ Principles of operation for each block:
     \item P2S (Parallel to Serial): Converts parallel data back to serial, returning the signal stream to its original continuous form for transmission.
     \item Add CP:  This operation concatenates a copy of the last CP samples of the OFDM time domain signal to the beginning. This way, a cyclic extension is achieved.
     \item Channel: The wireless channel between transmitter and receiver. Here, we use a simple two-tap multipath channel.
-    \item Remove CP: Remove `CP` from the received signal.
+    \item Remove CP: Remove CP from the received signal.
     \item FFT(Fast Fourier Transform): Transforming signals from the frequency domain to the time domain.
     \item Channel Estimate: Based on pilot signals, the receiver estimates the transmission channel using estimation algorithms.
     \item Equalize: For each subcarrier, the influence of the channel is removed such that we get the clear (only noisy) constellation symbols back.
