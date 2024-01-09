@@ -17,7 +17,7 @@ Now, that we have defined the necessary parameters for our OFDM example, we need
     \label{input}
 \end{figure}
 
-We first need to get all the pixels value (from all 3 channels) and lay them in a 1D array. this array is gonna have a size of $width*height*channel = 256*256*3 = 196608$ (bytes). The pixels value is in decimal, we need to convert it into binary.
+The program reads data from an input image file and obtains all the pixels value (from all 3 channels). This matrix is then rearranged into a 1D array. This array is gonna have a size of $width*height*channel = 256*256*3 = 196608$ (bytes).
 
 Subsequently, we add the CRC (Cyclic redundancy check) \cite{crc} to the end of each byte. The CRC is serve as a way to check for errors. Basically, the  generator at the transmitter consists of 4 steps:
 
@@ -151,7 +151,9 @@ Finally, the bit groups need to be converted to a serial stream of bits, by mean
     \label{errors}
 \end{table}
 
-For further analysis, we the varying SNRDB from 0 to 40 db and plot the equivalent BER value, as shown in Figure \ref{ber}.
+\subsection{Error Calculations}
+For further analysis, we the varying SNRDB from 0 to 40 db and then calculating the error bits using CRC decode. Dividing the total number of errors by total number of
+demodulated symbols, the bit-error-rate (BER) is found. Figure \ref{ber} show the plot of BER with respecte to SNR.
 
 \begin{figure}[htbp]
     \centering
