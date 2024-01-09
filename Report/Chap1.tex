@@ -143,7 +143,7 @@ Cyclic Prefix (also known as Guard Interval) refers to the prefixing of a symbol
     \item It provides a guard interval to eliminate intersymbol interference from the previous symbol.
     \item It repeats the end of the symbol so the linear convolution of a frequency-selective multipath channel can be modeled as circular convolution, which in turn may transform to the frequency domain via a discrete Fourier transform. This approach accommodates simple frequency domain processing, such as channel estimation and equalization.
 \end{itemize}
-Figure \ref{fig:cp} illustrated two OFDM symbols, each having a dedicated CP. The length of each OFDM symbol (without CP) is $T_S$, the length of Cyclic Prefix is $T_G$ and the length of OFDM symbol (with CP) is $T$. Having a long symbol periods diminish the probability of having ISI, but could not eliminate it. The length of Cyclic Prefix $T_G$ must be longer than the maximal time delay of the channel : $T_G \geq \tau_{max}$ to make ISI nearly eliminated.
+Figure \ref{fig:cp} \cite{CP2} illustrated two OFDM symbols, each having a dedicated CP. The length of each OFDM symbol (without CP) is $T_S$, the length of Cyclic Prefix is $T_G$ and the length of OFDM symbol (with CP) is $T$. Having a long symbol periods diminish the probability of having ISI, but could not eliminate it. The length of Cyclic Prefix $T_G$ must be longer than the maximal time delay of the channel : $T_G \geq \tau_{max}$ to make ISI nearly eliminated.
 
 \begin{figure}[htbp]
     \centering
